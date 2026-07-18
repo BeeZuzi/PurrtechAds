@@ -1,0 +1,41 @@
+<% content_for :title, "My Servers — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= link_to icon_home_svg.html_safe, dashboard_path, class: "icon-btn", "aria-label": "Back to dashboard" %>
+  </div>
+</header>
+
+<main class="setup-main">
+  <section class="setup-hero">
+    <h1>Your servers</h1>
+    <p class="lede">Manage your registered servers or add a new one.</p>
+  </section>
+
+  <% if @servers.any? %>
+    <div class="server-list">
+      <% @servers.each do |server| %>
+        <div class="server-item">
+          <div class="server-item-info">
+            <h3><%= server.name %></h3>
+            <p><%= server.description.presence || "No description" %></p>
+          </div>
+          <div class="server-item-actions">
+            <span class="status-badge status-<%= server.status %>"><%= server.status.humanize %></span>
+            <%= link_to "Request contract", new_server_contract_request_path(server), class: "btn btn-ghost btn-sm" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <div class="empty-state-icon"><%= icon_server_svg.html_safe %></div>
+      <h3>No servers yet</h3>
+      <p>Register your first Minecraft server to start setting up rewarded ads.</p>
+    </div>
+  <% end %>
+
+  <div class="setup-cta">
+    <%= link_to "Register new server", new_server_path, class: "btn btn-primary" %>
+  </div>
+</main>

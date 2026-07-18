@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  server: one
+  entity_type: MyString
+  legal_name: MyString
+  country_code: MyString
+  tax_id: MyString
+  registered_address: MyText
+  contact_email: MyString
+  phone: MyString
+  preferred_currency: MyString
+  payout_method: MyString
+  message: MyText
+  status: MyString
+
+two:
+  user: two
+  server: two
+  entity_type: MyString
+  legal_name: MyString
+  country_code: MyString
+  tax_id: MyString
+  registered_address: MyText
+  contact_email: MyString
+  phone: MyString
+  preferred_currency: MyString
+  payout_method: MyString
+  message: MyText
+  status: MyString

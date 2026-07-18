@@ -1,0 +1,15 @@
+<% content_for :title, "Watch an ad — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= link_to icon_profile_svg.html_safe, profile_path, class: "icon-btn", "aria-label": "Profile" %>
+  </div>
+</header>
+
+<main class="dashboard-main">
+  <section class="dashboard-hero">
+    <h1>Watch an ad</h1>
+    <p class="lede">No ads are available yet — this is where a rewarded ad will play once your server connects a plugin.</p>
+    <%= link_to "Back to dashboard", dashboard_path, class: "btn btn-ghost" %>
+  </section>
+</main>

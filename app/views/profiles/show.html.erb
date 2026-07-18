@@ -1,0 +1,47 @@
+<% content_for :title, "My Profile — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= link_to icon_home_svg.html_safe, dashboard_path, class: "icon-btn", "aria-label": "Back to dashboard" %>
+  </div>
+  <div class="topbar-right">
+    <%= button_to "Log out", session_path, method: :delete, class: "btn btn-ghost", form: { class: "logout-form" } %>
+  </div>
+</header>
+
+<main class="profile-main">
+  <section class="profile-card">
+    <div class="profile-avatar" aria-hidden="true"><%= @user.minecraft_nick.first.upcase %></div>
+    <h1><%= @user.minecraft_nick %></h1>
+    <p class="profile-email"><%= @user.email %></p>
+
+    <div class="profile-stats">
+      <div class="stat">
+        <span class="stat-value">0</span>
+        <span class="stat-label">Ads watched</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value"><%= @user.created_at.strftime("%b %Y") %></span>
+        <span class="stat-label">Member since</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">0</span>
+        <span class="stat-label">Supported servers</span>
+      </div>
+    </div>
+
+    <%= link_to "Edit profile", edit_profile_path, class: "btn btn-primary" %>
+  </section>
+
+  <section class="profile-section">
+    <h2 class="section-title">Recent activity</h2>
+    <p class="section-lede">Your reward claim history will show up here once your server plugin is connected.</p>
+
+    <div class="empty-state">
+      <div class="empty-state-icon"><%= icon_activity_svg.html_safe %></div>
+      <h3>No activity yet</h3>
+      <p>Watch your first rewarded ad to see your claim history here.</p>
+      <%= link_to "Watch an ad", watch_ad_path, class: "btn btn-primary" %>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,43 @@
+<% content_for :title, "Edit Profile — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= link_to icon_profile_svg.html_safe, profile_path, class: "icon-btn", "aria-label": "Profile" %>
+  </div>
+</header>
+
+<main class="profile-main">
+  <section class="auth-card edit-card">
+    <h1 class="section-title">Edit profile</h1>
+
+    <% if @user.errors.any? %>
+      <ul class="auth-errors">
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
+      <div class="field">
+        <%= f.label :email, "Email" %>
+        <%= f.email_field :email, required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :minecraft_nick, "Minecraft nick" %>
+        <%= f.text_field :minecraft_nick, required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :password, "New password (leave blank to keep current)" %>
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation, "Confirm new password" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+      <%= f.submit "Save changes", class: "btn btn-primary auth-submit" %>
+    <% end %>
+
+    <%= link_to "Cancel", profile_path, class: "btn btn-ghost", style: "margin-top: var(--space-3); width: 100%;" %>
+  </section>
+</main>

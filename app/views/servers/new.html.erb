@@ -1,0 +1,87 @@
+<% content_for :title, "Set up your server — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= link_to icon_home_svg.html_safe, dashboard_path, class: "icon-btn", "aria-label": "Back to dashboard" %>
+  </div>
+</header>
+
+<main class="setup-main">
+  <section class="setup-hero">
+    <span class="hero-badge">Server setup</span>
+    <h1>Get your server ready for rewarded ads</h1>
+    <p class="lede">Follow these steps to connect your Minecraft server to Ads. It only takes a few minutes.</p>
+  </section>
+
+  <section class="steps">
+    <div class="step">
+      <span class="step-num">01</span>
+      <div class="step-body">
+        <h3>Register your server</h3>
+        <p>Give your server a name and a short description so players can recognize it.</p>
+
+        <% if @server.errors.any? %>
+          <ul class="auth-errors">
+            <% @server.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <%= form_with model: @server, url: servers_path, local: true do |f| %>
+          <div class="field">
+            <%= f.label :name, "Server name" %>
+            <%= f.text_field :name, placeholder: "SkyBlock Prague", required: true %>
+          </div>
+          <div class="field">
+            <%= f.label :description, "Description" %>
+            <%= f.text_area :description, rows: 3, maxlength: 500, placeholder: "A short description of your server",
+                data: { controller: "char-counter", "char-counter-target": "input", action: "input->char-counter#update" } %>
+            <div class="field-footer">
+              <span class="char-counter" data-char-counter-target="counter">0 / 500</span>
+            </div>
+          </div>
+          <%= f.submit "Register server", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">02</span>
+      <div class="step-body">
+        <h3>Download the Ads plugin</h3>
+        <p>Download the plugin JAR file and drop it into your server's <code>/plugins</code> folder.</p>
+        <a href="#" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Download plugin (coming soon)</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">03</span>
+      <div class="step-body">
+        <h3>Add your API key</h3>
+        <p>Copy your server's API key and secret into the plugin's <code>config.yml</code>, then restart your server.</p>
+        <div class="code-box">
+          <pre><code>server_id: "your-server-id"
+api_key: "your-api-key"
+api_secret: "your-api-secret"</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">04</span>
+      <div class="step-body">
+        <h3>Configure your reward</h3>
+        <p>Use your server's own commands to decide what players receive after watching an ad — that part is entirely up to you.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">05</span>
+      <div class="step-body">
+        <h3>Go live</h3>
+        <p>Once everything is set up, your players will be able to watch ads and claim rewards on your server.</p>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,72 @@
+<% content_for :title, "Dashboard — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= link_to icon_profile_svg.html_safe, profile_path, class: "icon-btn", "aria-label": "Profile" %>
+
+    <%= form_tag "#", method: :get, class: "lang-form" do %>
+      <%= select_tag :locale,
+          options_for_select(
+            [["EN — English", "en"], ["CS — Čeština (soon)", "cs"], ["DE — Deutsch (soon)", "de"]],
+            "en"
+          ),
+          class: "lang-select",
+          "aria-label": "Site language",
+          id: "lang-select",
+          disabled: false %>
+    <% end %>
+  </div>
+  <div class="topbar-right">
+    <%= button_to "Log out", session_path, method: :delete, class: "btn btn-ghost", form: { class: "logout-form" } %>
+  </div>
+</header>
+
+<main class="dashboard-main">
+  <section class="dashboard-hero">
+    <h1>Welcome, <%= @user.minecraft_nick %></h1>
+    <p class="lede">Choose what you want to do next.</p>
+
+    <div class="dashboard-choices">
+      <%= link_to servers_path, class: "choice-card" do %>
+        <span class="choice-icon"><%= icon_server_svg.html_safe %></span>
+        <h2>Do you own a server?</h2>
+        <p>Register your Minecraft server and set up rewarded ads for your players.</p>
+      <% end %>
+
+      <%= link_to watch_ad_path, class: "choice-card" do %>
+        <span class="choice-icon"><%= icon_play_svg.html_safe %></span>
+        <h2>Watch an ad</h2>
+        <p>Watch a rewarded ad and claim your in-game reward on a connected server.</p>
+      <% end %>
+    </div>
+  </section>
+</main>
+
+<button type="button" class="settings-fab" data-theme-target="fab" data-action="click->theme#togglePanel" aria-label="Open settings" aria-expanded="false">
+  <%= icon_gear_svg.html_safe %>
+</button>
+
+<div class="settings-panel" data-theme-target="panel">
+  <h3>Settings</h3>
+
+  <div class="setting-row">
+    <span class="setting-label">
+      <%= icon_sun_svg.html_safe %> Dark mode
+    </span>
+    <button type="button" class="switch" data-theme-target="themeSwitch" data-action="click->theme#toggleTheme" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
+  </div>
+
+  <div class="setting-row">
+    <span class="setting-label">
+      <%= icon_bell_svg.html_safe %> Notifications
+    </span>
+    <button type="button" class="switch on" data-theme-target="notifSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="true" aria-label="Toggle notifications"></button>
+  </div>
+
+  <div class="setting-row">
+    <span class="setting-label">
+      <%= icon_wind_svg.html_safe %> Reduced motion
+    </span>
+    <button type="button" class="switch" data-theme-target="motionSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="false" aria-label="Toggle reduced motion"></button>
+  </div>
+</div>

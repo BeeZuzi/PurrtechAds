@@ -1,0 +1,108 @@
+<% content_for :title, "Request a contract — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= link_to icon_home_svg.html_safe, servers_path, class: "icon-btn", "aria-label": "Back to servers" %>
+  </div>
+</header>
+
+<main class="setup-main">
+  <section class="setup-hero">
+    <span class="hero-badge">Contract request</span>
+    <h1>Request a contract for <%= @server.name %></h1>
+    <p class="lede">Tell us about your business and payment preferences so our team can prepare an agreement.</p>
+  </section>
+
+  <div class="auth-wrap">
+    <div class="auth-card wide-card" data-controller="multistep-form">
+
+      <div class="step-dots">
+        <span class="step-dot active" data-multistep-form-target="dot">1</span>
+        <span class="step-dot" data-multistep-form-target="dot">2</span>
+        <span class="step-dot" data-multistep-form-target="dot">3</span>
+      </div>
+
+      <% if @contract_request.errors.any? %>
+        <ul class="auth-errors">
+          <% @contract_request.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= form_with model: @contract_request, url: server_contract_request_path(@server), local: true do |f| %>
+
+        <div class="form-step active" data-multistep-form-target="step">
+          <h3 class="step-title">About you or your business</h3>
+
+          <div class="field">
+            <%= f.label :entity_type, "Entity type" %>
+            <%= f.select :entity_type,
+                options_for_select([["Individual", "individual"], ["Sole trader", "sole_trader"], ["Company", "company"]]),
+                { prompt: "Select entity type" }, required: true %>
+          </div>
+          <div class="field">
+            <%= f.label :legal_name, "Legal / business name" %>
+            <%= f.text_field :legal_name, placeholder: "e.g. Jane Doe or Acme s.r.o.", required: true %>
+          </div>
+          <div class="field">
+            <%= f.label :country_code, "Country of registration" %>
+            <%= f.select :country_code, options_for_select(country_options), { prompt: "Select country" }, required: true %>
+          </div>
+          <div class="field">
+            <%= f.label :tax_id, "Tax ID / VAT number (optional)" %>
+            <%= f.text_field :tax_id, placeholder: "e.g. VAT / EIN / IČO" %>
+          </div>
+          <div class="field">
+            <%= f.label :registered_address, "Registered address" %>
+            <%= f.text_area :registered_address, rows: 2, placeholder: "Street, city, postal code, country", required: true %>
+          </div>
+        </div>
+
+        <div class="form-step" data-multistep-form-target="step">
+          <h3 class="step-title">Contact details</h3>
+
+          <div class="field">
+            <%= f.label :contact_email, "Contact email" %>
+            <%= f.email_field :contact_email, placeholder: "you@company.com", required: true %>
+          </div>
+          <div class="field">
+            <%= f.label :phone, "Phone (optional)" %>
+            <%= f.text_field :phone, placeholder: "+1 555 123 4567" %>
+          </div>
+          <div class="field">
+            <%= f.label :message, "Anything else we should know?" %>
+            <%= f.text_area :message, rows: 4, maxlength: 1000, placeholder: "Tell us about your server, player base, or specific requirements",
+                data: { controller: "char-counter", "char-counter-target": "input", action: "input->char-counter#update" } %>
+            <div class="field-footer">
+              <span class="char-counter" data-char-counter-target="counter">0 / 1000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-step" data-multistep-form-target="step">
+          <h3 class="step-title">Payment preferences</h3>
+
+          <div class="field">
+            <%= f.label :preferred_currency, "Preferred currency" %>
+            <%= f.select :preferred_currency,
+                options_for_select([["USD", "USD"], ["EUR", "EUR"], ["GBP", "GBP"], ["CZK", "CZK"], ["PLN", "PLN"], ["CAD", "CAD"], ["AUD", "AUD"], ["JPY", "JPY"]], "USD"),
+                {}, required: true %>
+          </div>
+          <div class="field">
+            <%= f.label :payout_method, "Payout method" %>
+            <%= f.select :payout_method,
+                options_for_select([["Bank transfer", "bank_transfer"], ["PayPal", "paypal"], ["Stripe", "stripe"], ["Crypto", "crypto"]]),
+                { prompt: "Select payout method" }, required: true %>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button type="button" class="btn btn-ghost" data-multistep-form-target="prevBtn" data-action="click->multistep-form#prev">Back</button>
+          <button type="button" class="btn btn-primary" data-multistep-form-target="nextBtn" data-action="click->multistep-form#next">Next</button>
+          <%= f.submit "Send request", class: "btn btn-primary", style: "display:none;", data: { "multistep-form-target": "submitBtn" } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>

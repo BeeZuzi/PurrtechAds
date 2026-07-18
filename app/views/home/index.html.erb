@@ -1,0 +1,156 @@
+<% content_for :title, "Ads — Watch. Earn. Play." %>
+
+<header class="topbar">
+  <div class="topbar-left">
+   
+    <%= form_tag "#", method: :get, class: "lang-form" do %>
+      <%= select_tag :locale,
+          options_for_select(
+            [["EN — English", "en"], ["CS — Čeština (soon)", "cs"], ["DE — Deutsch (soon)", "de"]],
+            "en"
+          ),
+          class: "lang-select",
+          "aria-label": "Site language",
+          id: "lang-select",
+          disabled: false %>
+    <% end %>
+  </div>
+  <div class="topbar-right"></div>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="hero-badge">For Minecraft server owners &amp; players</span>
+    <h1>Watch an ad. <em>Earn a reward.</em> On your own terms.</h1>
+    <p class="lede">
+      Ads connects players and Minecraft servers through simple, opt-in rewarded
+      advertising — servers decide the in-game reward through their own plugin,
+      we handle the ad and the claim.
+    </p>
+    <div class="hero-actions">
+      <%= link_to "Get started", "#auth", class: "btn btn-primary" %>
+      <%= link_to "How it works", "#how-it-works", class: "btn btn-ghost" %>
+    </div>
+  </section>
+
+  <div class="auth-wrap" id="auth" data-controller="theme">
+    <div class="auth-card">
+      <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+        <button type="button"
+                class="auth-tab"
+                data-tab="login"
+                data-theme-target="authTab"
+                data-action="click->theme#switchAuthTab"
+                role="tab" aria-selected="false">Log in</button>
+
+        <button type="button"
+                class="auth-tab active"
+                data-tab="signin"
+                data-theme-target="authTab"
+                data-action="click->theme#switchAuthTab"
+                role="tab" aria-selected="true">Sign up</button>
+      </div>
+
+      <%# LOGIN FORM %>
+      <%= form_with url: session_path, method: :post, id: "login-form", local: true,
+          class: "auth-form", data: { theme_target: "loginForm" } do |f| %>
+        <div class="field">
+          <%= f.label :email, "Email" %>
+          <%= f.email_field :email, placeholder: "you@example.com", autocomplete: "email", required: true %>
+        </div>
+        <div class="field">
+          <%= f.label :password, "Password" %>
+          <%= f.password_field :password, placeholder: "••••••••", autocomplete: "current-password", required: true %>
+        </div>
+        <%= f.submit "Log in", class: "btn btn-primary auth-submit" %>
+      <% end %>
+
+      <%# SIGNUP FORM %>
+      <%= form_with model: (@user || User.new), url: users_path, method: :post, id: "signup-form", local: true,
+          class: "auth-form active", data: { theme_target: "signupForm" } do |f| %>
+        <% if (@user || User.new).errors.any? %>
+          <ul class="auth-errors">
+            <% (@user || User.new).errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        <div class="field">
+          <%= f.label :email, "Email" %>
+          <%= f.email_field :email, placeholder: "you@example.com", autocomplete: "email", required: true %>
+        </div>
+        <div class="field">
+          <%= f.label :minecraft_nick, "Minecraft nick" %>
+          <%= f.text_field :minecraft_nick, placeholder: "Steve123", autocomplete: "username", required: true %>
+        </div>
+        <div class="field">
+          <%= f.label :password, "Password" %>
+          <%= f.password_field :password, placeholder: "••••••••", autocomplete: "new-password", required: true, minlength: 8 %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation, "Confirm password" %>
+          <%= f.password_field :password_confirmation, placeholder: "••••••••", autocomplete: "new-password", required: true %>
+        </div>
+        <%= f.submit "Create account", class: "btn btn-primary auth-submit" %>
+      <% end %>
+
+      <p class="auth-note">By continuing you agree to our terms and privacy policy.</p>
+    </div>
+  </div>
+
+  <section class="section" id="how-it-works">
+    <h2 class="section-title">How Ads works</h2>
+    <p class="section-lede">A simple loop between players, ads, and your server's own plugin logic.</p>
+
+    <div class="feature-row">
+      <article class="feature-card wide">
+        <span class="feature-num">01</span>
+        <h3>Player watches an ad</h3>
+        <p>The player opts in and watches a short rewarded ad on the Ads platform — no reward is promised by us in advance.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-num">02</span>
+        <h3>Claim is created</h3>
+        <p>Once the ad is confirmed complete, a short-lived claim is issued for that player.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-num">03</span>
+        <h3>Plugin grants reward</h3>
+        <p>Your server's plugin checks the claim and grants whatever reward you've configured in-game.</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<div data-controller="theme">
+  <button type="button" class="settings-fab" data-theme-target="fab" data-action="click->theme#togglePanel" aria-label="Open settings" aria-expanded="false">
+    <%= icon_gear_svg.html_safe %>
+  </button>
+
+  <div class="settings-panel" data-theme-target="panel">
+    <h3>Settings</h3>
+
+    <div class="setting-row">
+      <span class="setting-label">
+        <%= icon_sun_svg.html_safe %> Dark mode
+      </span>
+      <button type="button" class="switch" data-theme-target="themeSwitch" data-action="click->theme#toggleTheme" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
+    </div>
+
+    <div class="setting-row">
+      <span class="setting-label">
+        <%= icon_bell_svg.html_safe %> Notifications
+      </span>
+      <button type="button" class="switch on" data-theme-target="notifSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="true" aria-label="Toggle notifications"></button>
+    </div>
+
+    <div class="setting-row">
+      <span class="setting-label">
+        <%= icon_wind_svg.html_safe %> Reduced motion
+      </span>
+      <button type="button" class="switch" data-theme-target="motionSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="false" aria-label="Toggle reduced motion"></button>
+    </div>
+  </div>
+</div>
+
+<footer>© <%= Date.current.year %> Ads — rewarded ads for Minecraft servers.</footer>
