@@ -13,12 +13,12 @@ Rails.application.routes.draw do
   root "home#index"
 
   # Auth — sign in / log in card na landing page
-  resource :session, only: [:new, :create, :destroy]
+  resource :session, only: [ :new, :create, :destroy ]
 
   # Profil (ikonka vlevo nahoře v topbaru)
-  resource :profile, only: [:show, :edit, :update], controller: "profiles"
+  resource :profile, only: [ :show, :edit, :update ], controller: "profiles"
 
-  resources :users, only: [:new, :create], path: "signup"
+  resources :users, only: [ :new, :create ], path: "signup"
 
   get "dashboard", to: "dashboard#show", as: :dashboard
   get "watch-ad", to: "ads#watch", as: :watch_ad
@@ -26,14 +26,14 @@ Rails.application.routes.draw do
   # volba jazyka — jednoduchý GET endpoint pro přepnutí locale
   get "locale/:locale", to: "locale#update", as: :set_locale
 
-  resources :servers, only: [:index, :new, :create, :show, :edit, :update] do
-    resource :contract_request, only: [:new, :create], controller: "contract_requests"
+  resources :servers, only: [ :index, :new, :create, :show, :edit, :update ] do
+    resource :contract_request, only: [ :new, :create ], controller: "contract_requests"
   end
 
   # --- do budoucna, pro plugin komunikaci a server dashboard ---
   namespace :api do
     namespace :plugin do
-      resources :servers, only: [:show] do
+      resources :servers, only: [ :show ] do
         get "config", on: :member
       end
       get "players/:uuid/claims", to: "claims#index", as: :player_claims
@@ -44,9 +44,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "dashboard#index"
-    resources :servers, only: [:index, :show, :update]
-    resources :contract_requests, only: [:index, :show, :update]
-    resources :fraud_flags, only: [:index, :show, :update]
-    resources :payouts, only: [:index, :show]
+    resources :servers, only: [ :index, :show, :update ]
+    resources :contract_requests, only: [ :index, :show, :update ]
+    resources :fraud_flags, only: [ :index, :show, :update ]
+    resources :payouts, only: [ :index, :show ]
   end
 end

@@ -79,7 +79,6 @@ def icon_play_svg
 end
 
 def country_options
-    ISO3166::Country.all.map { |c| [c.common_name, c.alpha2] }.sort_by(&:first)
+    ISO3166::Country.all.map { |c| [ c.common_name, c.alpha2 ] }.sort_by(&:first)
   end
-
 end
