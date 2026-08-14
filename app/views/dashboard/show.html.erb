@@ -2,19 +2,8 @@
 
 <header class="topbar">
   <div class="topbar-left">
-    <%= link_to icon_profile_svg.html_safe, profile_path, class: "icon-btn", "aria-label": "Profile" %>
-
-    <%= form_tag "#", method: :get, class: "lang-form" do %>
-      <%= select_tag :locale,
-          options_for_select(
-            [["EN — English", "en"], ["CS — Čeština (soon)", "cs"], ["DE — Deutsch (soon)", "de"]],
-            "en"
-          ),
-          class: "lang-select",
-          "aria-label": "Site language",
-          id: "lang-select",
-          disabled: false %>
-    <% end %>
+    <%= render "shared/nav_icons" %>
+    <%= render "shared/locale_switcher" %>
   </div>
   <div class="topbar-right">
     <%= button_to "Log out", session_path, method: :delete, class: "btn btn-ghost", form: { class: "logout-form" } %>
@@ -23,50 +12,66 @@
 
 <main class="dashboard-main">
   <section class="dashboard-hero">
-    <h1>Welcome, <%= @user.minecraft_nick %></h1>
-    <p class="lede">Choose what you want to do next.</p>
+    <h1><%= t("dashboard.welcome", nick: @user.minecraft_nick) %></h1>
 
-    <div class="dashboard-choices">
-      <%= link_to servers_path, class: "choice-card" do %>
-        <span class="choice-icon"><%= icon_server_svg.html_safe %></span>
-        <h2>Do you own a server?</h2>
-        <p>Register your Minecraft server and set up rewarded ads for your players.</p>
-      <% end %>
+    <% if current_user.can_approve_servers? %>
+      <p class="lede"><%= t("dashboard.admin_lede") %></p>
 
-      <%= link_to watch_ad_path, class: "choice-card" do %>
-        <span class="choice-icon"><%= icon_play_svg.html_safe %></span>
-        <h2>Watch an ad</h2>
-        <p>Watch a rewarded ad and claim your in-game reward on a connected server.</p>
-      <% end %>
-    </div>
+      <div class="dashboard-choices">
+        <% if current_user.can_manage_users? %>
+          <%= link_to admin_users_path, class: "choice-card" do %>
+            <span class="choice-icon"><%= icon_gear_svg.html_safe %></span>
+            <h2><%= t("dashboard.manage_users_title") %></h2>
+            <p><%= t("dashboard.manage_users_body") %></p>
+          <% end %>
+        <% end %>
+
+        <%= link_to admin_servers_path, class: "choice-card" do %>
+          <span class="choice-icon"><%= icon_server_svg.html_safe %></span>
+          <h2><%= t("dashboard.servers_title") %></h2>
+          <p><%= t("dashboard.servers_body") %></p>
+        <% end %>
+
+        <%= link_to admin_contract_requests_path, class: "choice-card" do %>
+          <span class="choice-icon"><%= icon_play_svg.html_safe %></span>
+          <h2><%= t("dashboard.contract_requests_title") %></h2>
+          <p><%= t("dashboard.contract_requests_body") %></p>
+        <% end %>
+
+        <% if current_user.admin? || current_user.superadmin? %>
+          <%= link_to admin_fraud_flags_path, class: "choice-card" do %>
+            <span class="choice-icon"><%= icon_gear_svg.html_safe %></span>
+            <h2><%= t("dashboard.fraud_flags_title") %></h2>
+            <p><%= t("dashboard.fraud_flags_body") %></p>
+          <% end %>
+        <% end %>
+
+        <% if current_user.superadmin? %>
+          <%= link_to admin_payouts_path, class: "choice-card" do %>
+            <span class="choice-icon"><%= icon_gear_svg.html_safe %></span>
+            <h2><%= t("dashboard.payouts_title") %></h2>
+            <p><%= t("dashboard.payouts_body") %></p>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="lede"><%= t("dashboard.player_lede") %></p>
+
+      <div class="dashboard-choices">
+        <%= link_to servers_path, class: "choice-card" do %>
+          <span class="choice-icon"><%= icon_server_svg.html_safe %></span>
+          <h2><%= t("dashboard.own_server_title") %></h2>
+          <p><%= t("dashboard.own_server_body") %></p>
+        <% end %>
+
+        <%= link_to watch_ad_path, class: "choice-card" do %>
+          <span class="choice-icon"><%= icon_play_svg.html_safe %></span>
+          <h2><%= t("dashboard.watch_ad_title") %></h2>
+          <p><%= t("dashboard.watch_ad_body") %></p>
+        <% end %>
+      </div>
+    <% end %>
   </section>
 </main>
 
-<button type="button" class="settings-fab" data-theme-target="fab" data-action="click->theme#togglePanel" aria-label="Open settings" aria-expanded="false">
-  <%= icon_gear_svg.html_safe %>
-</button>
-
-<div class="settings-panel" data-theme-target="panel">
-  <h3>Settings</h3>
-
-  <div class="setting-row">
-    <span class="setting-label">
-      <%= icon_sun_svg.html_safe %> Dark mode
-    </span>
-    <button type="button" class="switch" data-theme-target="themeSwitch" data-action="click->theme#toggleTheme" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
-  </div>
-
-  <div class="setting-row">
-    <span class="setting-label">
-      <%= icon_bell_svg.html_safe %> Notifications
-    </span>
-    <button type="button" class="switch on" data-theme-target="notifSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="true" aria-label="Toggle notifications"></button>
-  </div>
-
-  <div class="setting-row">
-    <span class="setting-label">
-      <%= icon_wind_svg.html_safe %> Reduced motion
-    </span>
-    <button type="button" class="switch" data-theme-target="motionSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="false" aria-label="Toggle reduced motion"></button>
-  </div>
-</div>
+<%= render "shared/settings_panel" %>

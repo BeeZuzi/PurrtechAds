@@ -1,0 +1,7 @@
+Hi <%= @user.minecraft_nick %>,
+
+Confirm your email to finish setting up your Ads account:
+
+<%= email_confirmation_url(token: @token) %>
+
+This link expires in 24 hours. If you didn't create this account, ignore this email.

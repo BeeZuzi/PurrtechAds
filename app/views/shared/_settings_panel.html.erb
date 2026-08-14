@@ -1,0 +1,30 @@
+<div data-controller="theme">
+  <button type="button" class="settings-fab" data-theme-target="fab" data-action="click->theme#togglePanel" aria-label="Open settings" aria-expanded="false">
+    <%= icon_gear_svg.html_safe %>
+  </button>
+
+  <div class="settings-panel" data-theme-target="panel">
+    <h3><%= t("layout.settings.title") %></h3>
+
+    <div class="setting-row">
+      <span class="setting-label">
+        <%= icon_sun_svg.html_safe %> <%= t("layout.settings.dark_mode") %>
+      </span>
+      <button type="button" class="switch" data-theme-target="themeSwitch" data-action="click->theme#toggleTheme" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
+    </div>
+
+    <div class="setting-row">
+      <span class="setting-label">
+        <%= icon_bell_svg.html_safe %> <%= t("layout.settings.notifications") %>
+      </span>
+      <button type="button" class="switch on" data-theme-target="notifSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="true" aria-label="Toggle notifications"></button>
+    </div>
+
+    <div class="setting-row">
+      <span class="setting-label">
+        <%= icon_wind_svg.html_safe %> <%= t("layout.settings.reduced_motion") %>
+      </span>
+      <button type="button" class="switch" data-theme-target="motionSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="false" aria-label="Toggle reduced motion"></button>
+    </div>
+  </div>
+</div>

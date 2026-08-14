@@ -1,0 +1,36 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "banned" %>
+<% end %>
+
+<main class="banned-main">
+  <div class="banned-card">
+    <div class="banned-icon">🚫</div>
+
+    <h1>Účet byl zablokován</h1>
+
+    <p>Tvůj účet byl zablokován administrátorem.</p>
+
+    <div class="banned-info">
+      <% if @user&.banned_at %>
+        <p class="admin-label">Datum zablokování</p>
+        <p class="value"><%= @user.banned_at.strftime("%d.%m.%Y %H:%M") %></p>
+      <% end %>
+
+      <% if @user&.banned_until %>
+        <p class="admin-label">Blokace trvá do</p>
+        <p class="value"><%= @user.banned_until.strftime("%d.%m.%Y %H:%M") %></p>
+      <% else %>
+        <p class="admin-label">Doba trvání</p>
+        <p class="value">Trvalá blokace</p>
+      <% end %>
+    </div>
+
+    <p>Pokud si myslíš, že jde o omyl, nebo chceš zjistit délku a důvod blokace, kontaktuj nás na Discordu.</p>
+
+    <a href="https://discord.gg/tvuj-invite-link" target="_blank" rel="noopener" class="banned-discord">
+      Kontaktovat podporu na Discordu
+    </a>
+
+    <%= link_to "Zpět na hlavní stránku", root_path, class: "banned-back-link" %>
+  </div>
+</main>

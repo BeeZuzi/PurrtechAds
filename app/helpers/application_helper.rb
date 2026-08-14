@@ -78,6 +78,15 @@ def icon_play_svg
   SVG
 end
 
+def icon_shield_svg
+  <<~SVG
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 2 L20 6 V12 C20 17 16.5 20.5 12 22 C7.5 20.5 4 17 4 12 V6 Z" />
+      <path d="M9 12 L11 14 L15 10" />
+    </svg>
+  SVG
+end
+
 def country_options
     ISO3166::Country.all.map { |c| [ c.common_name, c.alpha2 ] }.sort_by(&:first)
   end

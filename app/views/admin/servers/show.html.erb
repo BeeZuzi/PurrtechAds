@@ -1,0 +1,32 @@
+<main class="admin-main">
+  <h1>Detail serveru</h1>
+
+  <div class="detail-card">
+    <h2>Základní informace</h2>
+    <p><strong>Název:</strong> <%= @server.name %></p>
+    <p><strong>Vlastník:</strong> <%= @server.user&.email %></p>
+    <p><strong>Popis:</strong> <%= @server.description.presence || "—" %></p>
+    <p><strong>Vytvořeno:</strong> <%= @server.created_at.strftime("%d.%m.%Y %H:%M") %></p>
+
+    <h2>Aktuální status</h2>
+    <p>
+      <span class="status-badge status-<%= @server.status %>">
+        <%= @server.status %>
+      </span>
+    </p>
+
+    <h2>API přístupové údaje</h2>
+    <p><strong>API Key:</strong> <code><%= @server.api_key %></code></p>
+    <p><strong>API Secret:</strong> <code><%= @server.api_secret %></code></p>
+  </div>
+
+  <%= form_with url: admin_server_path(@server), method: :patch, class: "status-form" do |f| %>
+    <div class="field">
+      <label class="admin-label">Změnit status</label>
+      <%= f.select :status, %w[pending approved rejected suspended], selected: @server.status %>
+    </div>
+    <%= f.submit "Uložit", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= link_to "Zpět na seznam", admin_servers_path, class: "banned-back-link" %>
+</main>

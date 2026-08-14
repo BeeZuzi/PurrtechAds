@@ -1,11 +1,31 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Password for every fixture user is "password123" (see test_helper.rb FIXTURE_PASSWORD).
 
-one:
-  email: MyString
-  minecraft_nick: MyString
-  password_digest: MyString
+owner:
+  email: owner@example.com
+  minecraft_nick: ServerOwner
+  password_digest: <%= BCrypt::Password.create("password123") %>
+  role: server_owner
+  confirmed_at: <%= Time.current %>
 
-two:
-  email: MyString
-  minecraft_nick: MyString
-  password_digest: MyString
+player:
+  email: player@example.com
+  minecraft_nick: PlayerOne
+  password_digest: <%= BCrypt::Password.create("password123") %>
+  role: user
+  confirmed_at: <%= Time.current %>
+  minecraft_uuid: 069a79f4-44e9-4726-a5be-fca90e38aaf5
+
+admin:
+  email: admin@example.com
+  minecraft_nick: AdminUser
+  password_digest: <%= BCrypt::Password.create("password123") %>
+  role: admin
+  confirmed_at: <%= Time.current %>
+
+superadmin:
+  email: superadmin@example.com
+  minecraft_nick: SuperAdminUser
+  password_digest: <%= BCrypt::Password.create("password123") %>
+  role: superadmin
+  confirmed_at: <%= Time.current %>

@@ -386,3 +386,167 @@ footer { border-top: 1px solid var(--color-divider); padding: var(--space-8) var
 .step-nav { display: flex; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-6); }
 .step-nav .btn-primary[data-multistep-form-target="nextBtn"],
 .step-nav .btn-primary[data-multistep-form-target="submitBtn"] { margin-left: auto; }
+
+/* Admin section */
+.admin-main {
+  max-width: var(--content-wide);
+  margin-inline: auto;
+  padding: calc(96px + var(--space-8)) var(--space-4) var(--space-16);
+}
+
+.admin-main h1 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-6);
+}
+
+.filter-tabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.filter-tabs a {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface-offset);
+  text-decoration: none;
+}
+
+.filter-tabs a:hover {
+  background: var(--color-surface-offset-2);
+}
+
+.filter-tabs a.active {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  background: var(--color-surface-offset);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.admin-table td {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.admin-table tbody tr:hover {
+  background: var(--color-surface-2);
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Reuses existing .status-badge system, adds missing statuses */
+.status-pending { background: var(--color-primary-highlight); color: var(--color-primary); }
+.status-approved { background: color-mix(in oklab, var(--color-primary) 20%, var(--color-surface)); color: var(--color-primary-hover); }
+.status-rejected { background: color-mix(in oklab, var(--color-error) 15%, var(--color-surface)); color: var(--color-error); }
+.status-redeemed { background: color-mix(in oklab, var(--color-primary) 20%, var(--color-surface)); color: var(--color-primary-hover); }
+.status-failed { background: color-mix(in oklab, var(--color-error) 15%, var(--color-surface)); color: var(--color-error); }
+.status-expired { background: var(--color-surface-offset-2); color: var(--color-text-muted); }
+.status-reviewing { background: color-mix(in oklab, var(--color-primary) 20%, var(--color-surface)); color: var(--color-primary-hover); }
+.status-confirmed { background: color-mix(in oklab, var(--color-error) 15%, var(--color-surface)); color: var(--color-error); }
+.status-dismissed { background: var(--color-surface-offset-2); color: var(--color-text-muted); }
+.status-paid { background: color-mix(in oklab, var(--color-primary) 20%, var(--color-surface)); color: var(--color-primary-hover); }
+
+.ad-player {
+  max-width: 28rem;
+  margin: var(--space-6) 0;
+}
+
+.ad-progress-track {
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-offset-2);
+  overflow: hidden;
+  margin-bottom: var(--space-3);
+}
+
+.ad-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--color-primary);
+  transition: width 1s linear;
+}
+
+.ad-timer {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.detail-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-8);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-6);
+}
+
+.detail-card h2 {
+  font-size: var(--text-base);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+}
+
+.detail-card h2:first-child {
+  margin-top: 0;
+}
+
+.detail-card p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: var(--space-1) 0;
+}
+
+.detail-card p strong {
+  color: var(--color-text);
+}
+
+.status-form {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.status-form .field {
+  margin-bottom: 0;
+}
+
+.admin-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.status-form .field select {
+  width: auto;
+  min-width: 180px;
+}

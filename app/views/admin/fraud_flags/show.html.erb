@@ -1,0 +1,36 @@
+<div class="admin-main">
+  <h1>Fraud flag #<%= @fraud_flag.id %></h1>
+
+  <div class="detail-card">
+    <h2>Flagged account</h2>
+    <p><strong>User:</strong> <%= @fraud_flag.user.minecraft_nick %> (<%= @fraud_flag.user.email %>)</p>
+    <p><strong>Reason:</strong> <%= @fraud_flag.reason.humanize %></p>
+
+    <% if @fraud_flag.claim %>
+      <h2>Related claim</h2>
+      <p><strong>Server:</strong> <%= @fraud_flag.claim.server.name %></p>
+      <p><strong>Claim status:</strong> <span class="status-badge status-<%= @fraud_flag.claim.status %>"><%= @fraud_flag.claim.status %></span></p>
+      <p><strong>Watched at:</strong> <%= @fraud_flag.claim.watched_at.strftime("%d.%m.%Y %H:%M") %></p>
+      <p><strong>IP address:</strong> <%= @fraud_flag.claim.ip_address || "—" %></p>
+    <% end %>
+
+    <% if @fraud_flag.details.present? %>
+      <h2>Details</h2>
+      <p><%= @fraud_flag.details %></p>
+    <% end %>
+
+    <p><strong>Status:</strong> <span class="status-badge status-<%= @fraud_flag.status %>"><%= @fraud_flag.status %></span></p>
+    <p><strong>Flagged:</strong> <%= @fraud_flag.created_at.strftime("%d.%m.%Y %H:%M") %></p>
+  </div>
+
+  <%= form_with model: @fraud_flag, url: admin_fraud_flag_path(@fraud_flag), method: :patch, class: "status-form" do |f| %>
+    <div class="field">
+      <%= f.label :status %>
+      <%= f.select :status, FraudFlag::STATUSES.map { |s| [ s.capitalize, s ] }, selected: @fraud_flag.status %>
+    </div>
+
+    <%= f.submit "Update status", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= link_to "← Back to list", admin_fraud_flags_path, class: "btn btn-ghost" %>
+</div>

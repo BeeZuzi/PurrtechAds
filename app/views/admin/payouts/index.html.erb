@@ -1,0 +1,55 @@
+<div class="admin-main">
+  <h1>Payouts</h1>
+
+  <h2>Server balances</h2>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Server</th>
+        <th>Balance</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @servers.each do |server| %>
+        <tr>
+          <td><%= server.name %></td>
+          <td><%= Payout.format_cents(server.balance_cents) %></td>
+          <td>
+            <% if server.balance_cents > 0 %>
+              <%= button_to "Issue payout", admin_payouts_path(server_id: server.id), method: :post, class: "btn btn-primary btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2>Payout history</h2>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Server</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payouts.each do |payout| %>
+        <tr>
+          <td><%= payout.server.name %></td>
+          <td><%= Payout.format_cents(payout.amount_cents, payout.currency) %></td>
+          <td><span class="status-badge status-<%= payout.status %>"><%= payout.status %></span></td>
+          <td><%= payout.created_at.strftime("%d.%m.%Y") %></td>
+          <td><%= link_to "View", admin_payout_path(payout), class: "btn btn-ghost" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if @payouts.empty? %>
+    <p class="lede">No payouts issued yet.</p>
+  <% end %>
+</div>

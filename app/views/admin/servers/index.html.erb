@@ -1,0 +1,38 @@
+<main class="admin-main">
+  <h1>Správa serverů</h1>
+
+  <div class="filter-tabs">
+    <%= link_to "Vše", admin_servers_path, class: @status.blank? ? "active" : "" %>
+    <%= link_to "Čekající", admin_servers_path(status: "pending"), class: @status == "pending" ? "active" : "" %>
+    <%= link_to "Schválené", admin_servers_path(status: "approved"), class: @status == "approved" ? "active" : "" %>
+    <%= link_to "Zamítnuté", admin_servers_path(status: "rejected"), class: @status == "rejected" ? "active" : "" %>
+    <%= link_to "Suspendované", admin_servers_path(status: "suspended"), class: @status == "suspended" ? "active" : "" %>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Název</th>
+        <th>Vlastník</th>
+        <th>Status</th>
+        <th>Vytvořeno</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @servers.each do |server| %>
+        <tr>
+          <td><%= server.name %></td>
+          <td><%= server.user&.email %></td>
+          <td>
+            <span class="status-badge status-<%= server.status %>">
+              <%= server.status %>
+            </span>
+          </td>
+          <td><%= server.created_at.strftime("%d.%m.%Y") %></td>
+          <td><%= link_to "Detail", admin_server_path(server) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>

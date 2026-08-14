@@ -1,0 +1,63 @@
+<div class="admin-main">
+  <h1><%= @user.minecraft_nick %></h1>
+
+  <div class="detail-card">
+    <h2>Account information</h2>
+    <p><strong>Email:</strong> <%= @user.email %></p>
+    <p><strong>Role:</strong> <span class="status-badge status-pending"><%= @user.role.humanize %></span></p>
+    <p><strong>Status:</strong>
+      <% if @user.banned? %>
+        <span class="status-badge status-rejected">
+          Banned since <%= @user.banned_at.strftime("%d.%m.%Y %H:%M") %>
+          <% if @user.banned_until %>
+            (until <%= @user.banned_until.strftime("%d.%m.%Y %H:%M") %>)
+          <% else %>
+            (permanent)
+          <% end %>
+        </span>
+      <% else %>
+        <span class="status-badge status-approved">Active</span>
+      <% end %>
+    </p>
+    <p><strong>Joined:</strong> <%= @user.created_at.strftime("%d.%m.%Y %H:%M") %></p>
+
+    <h2>Servers</h2>
+    <% if @user.servers.any? %>
+      <% @user.servers.each do |server| %>
+        <p><%= link_to server.name, admin_server_path(server) %></p>
+      <% end %>
+    <% else %>
+      <p>No servers registered.</p>
+    <% end %>
+
+    <h2>Contract requests</h2>
+    <% if @user.contract_requests.any? %>
+      <% @user.contract_requests.each do |cr| %>
+        <p>
+          <%= link_to cr.legal_name, admin_contract_request_path(cr) %>
+          — <span class="status-badge status-<%= cr.status %>"><%= cr.status %></span>
+        </p>
+      <% end %>
+    <% else %>
+      <p>No contract requests submitted.</p>
+    <% end %>
+  </div>
+
+  <div class="status-form">
+    <%= link_to "Edit role", edit_admin_user_path(@user), class: "btn btn-primary" %>
+
+    <% if @user.banned? %>
+      <%= button_to "Unban user", unban_admin_user_path(@user), method: :patch, class: "btn btn-ghost" %>
+    <% else %>
+      <%= form_with url: ban_admin_user_path(@user), method: :patch do %>
+        <div class="field">
+          <%= label_tag :duration, "Ban duration" %>
+          <%= select_tag :duration, options_for_select([ [ "Permanent", "" ], [ "1 day", "1" ], [ "7 days", "7" ], [ "30 days", "30" ] ]) %>
+        </div>
+        <%= submit_tag "Ban user", class: "btn btn-ghost" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= link_to "← Back to list", admin_users_path, class: "btn btn-ghost" %>
+</div>

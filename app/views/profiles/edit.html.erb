@@ -2,7 +2,7 @@
 
 <header class="topbar">
   <div class="topbar-left">
-    <%= link_to icon_profile_svg.html_safe, profile_path, class: "icon-btn", "aria-label": "Profile" %>
+    <%= render "shared/nav_icons" %>
   </div>
 </header>
 
@@ -26,6 +26,10 @@
       <div class="field">
         <%= f.label :minecraft_nick, "Minecraft nick" %>
         <%= f.text_field :minecraft_nick, required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :minecraft_uuid, "Minecraft UUID (needed for the server plugin to find you)" %>
+        <%= f.text_field :minecraft_uuid, placeholder: "069a79f4-44e9-4726-a5be-fca90e38aaf5" %>
       </div>
       <div class="field">
         <%= f.label :password, "New password (leave blank to keep current)" %>

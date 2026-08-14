@@ -1,0 +1,37 @@
+<div class="admin-main">
+  <h1>Contract requests</h1>
+
+  <div class="filter-tabs">
+    <%= link_to "All", admin_contract_requests_path, class: params[:status].blank? ? "active" : "" %>
+    <% ContractRequest::STATUSES.each do |status| %>
+      <%= link_to status.capitalize, admin_contract_requests_path(status: status), class: params[:status] == status ? "active" : "" %>
+    <% end %>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Legal name</th>
+        <th>Server</th>
+        <th>Entity type</th>
+        <th>Country</th>
+        <th>Status</th>
+        <th>Submitted</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contract_requests.each do |cr| %>
+        <tr>
+          <td><%= cr.legal_name %></td>
+          <td><%= cr.server&.name %></td>
+          <td><%= cr.entity_type.humanize %></td>
+          <td><%= cr.country_name %></td>
+          <td><span class="status-badge status-<%= cr.status %>"><%= cr.status %></span></td>
+          <td><%= cr.created_at.strftime("%d.%m.%Y") %></td>
+          <td><%= link_to "View", admin_contract_request_path(cr), class: "btn btn-ghost" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

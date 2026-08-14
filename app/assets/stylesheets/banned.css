@@ -1,0 +1,108 @@
+.banned-main {
+  max-width: var(--content-narrow);
+  margin-inline: auto;
+  padding: calc(96px + var(--space-16)) var(--space-4) var(--space-16);
+  display: flex;
+  justify-content: center;
+}
+
+.banned-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.banned-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-5);
+  border-radius: var(--radius-full);
+  background: color-mix(in oklab, var(--color-error) 15%, var(--color-surface));
+  color: var(--color-error);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xl);
+}
+
+.banned-card h1 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-3);
+}
+
+.banned-card p {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  margin-inline: auto;
+  margin-bottom: var(--space-4);
+}
+
+.banned-info {
+  background: color-mix(in oklab, var(--color-error) 8%, var(--color-surface));
+  border: 1px solid color-mix(in oklab, var(--color-error) 30%, var(--color-border));
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin: var(--space-6) 0;
+  text-align: left;
+}
+
+.banned-info .admin-label {
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-1);
+}
+
+.banned-info .value {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-error);
+  margin-bottom: var(--space-4);
+}
+
+.banned-info .value:last-child {
+  margin-bottom: 0;
+}
+
+.banned-discord {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  min-height: 48px;
+  background: #5865f2;
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  margin: var(--space-2) 0 var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.banned-discord:hover {
+  background: #4752c4;
+  box-shadow: var(--shadow-md);
+}
+
+.banned-discord:active {
+  transform: scale(0.98);
+}
+
+.banned-back-link {
+  display: inline-block;
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  text-decoration: none;
+}
+
+.banned-back-link:hover {
+  color: var(--color-text-muted);
+  text-decoration: underline;
+}
