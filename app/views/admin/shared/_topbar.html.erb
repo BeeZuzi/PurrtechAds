@@ -1,0 +1,10 @@
+<header class="topbar">
+  <div class="topbar-left">
+    <%= render "shared/nav_icons" %>
+    <span class="admin-label">Admin</span>
+  </div>
+
+  <div class="topbar-right">
+    <%= button_to "Log out", session_path, method: :delete, class: "btn btn-ghost", form: { class: "logout-form" } %>
+  </div>
+</header>

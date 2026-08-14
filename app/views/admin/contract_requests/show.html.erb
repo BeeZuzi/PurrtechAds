@@ -1,0 +1,40 @@
+<div class="admin-main">
+  <h1>Contract request #<%= @contract_request.id %></h1>
+
+  <div class="detail-card">
+    <h2>Entity information</h2>
+    <p><strong>Legal name:</strong> <%= @contract_request.legal_name %></p>
+    <p><strong>Entity type:</strong> <%= @contract_request.entity_type.humanize %></p>
+    <p><strong>Country:</strong> <%= @contract_request.country_name %></p>
+    <p><strong>Tax ID:</strong> <%= @contract_request.tax_id.presence || "—" %></p>
+    <p><strong>Registered address:</strong> <%= @contract_request.registered_address %></p>
+
+    <h2>Contact</h2>
+    <p><strong>Contact email:</strong> <%= @contract_request.contact_email %></p>
+    <p><strong>Requested by:</strong> <%= @contract_request.user&.minecraft_nick %> (<%= @contract_request.user&.email %>)</p>
+    <p><strong>Server:</strong> <%= @contract_request.server&.name %></p>
+
+    <h2>Payout details</h2>
+    <p><strong>Preferred currency:</strong> <%= @contract_request.preferred_currency %></p>
+    <p><strong>Payout method:</strong> <%= @contract_request.payout_method.humanize %></p>
+
+    <% if @contract_request.message.present? %>
+      <h2>Message</h2>
+      <p><%= simple_format(@contract_request.message) %></p>
+    <% end %>
+
+    <p><strong>Status:</strong> <span class="status-badge status-<%= @contract_request.status %>"><%= @contract_request.status %></span></p>
+    <p><strong>Submitted:</strong> <%= @contract_request.created_at.strftime("%d.%m.%Y %H:%M") %></p>
+  </div>
+
+  <%= form_with model: @contract_request, url: admin_contract_request_path(@contract_request), method: :patch, class: "status-form" do |f| %>
+    <div class="field">
+      <%= f.label :status %>
+      <%= f.select :status, ContractRequest::STATUSES.map { |s| [s.capitalize, s] }, selected: @contract_request.status %>
+    </div>
+
+    <%= f.submit "Update status", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= link_to "← Back to list", admin_contract_requests_path, class: "btn btn-ghost" %>
+</div>

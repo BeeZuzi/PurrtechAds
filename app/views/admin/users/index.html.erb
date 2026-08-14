@@ -1,0 +1,49 @@
+<div class="admin-main">
+  <h1>Users</h1>
+
+  <div class="filter-tabs">
+    <%= link_to "All", admin_users_path, class: params[:role].blank? ? "active" : "" %>
+    <% User::ROLES.each do |role| %>
+      <%= link_to role.humanize, admin_users_path(role: role), class: params[:role] == role ? "active" : "" %>
+    <% end %>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Nick</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Joined</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.minecraft_nick %></td>
+          <td><%= user.email %></td>
+          <td><span class="status-badge status-pending"><%= user.role.humanize %></span></td>
+          <td>
+            <% if user.banned? %>
+              <span class="status-badge status-rejected">Banned</span>
+            <% else %>
+              <span class="status-badge status-approved">Active</span>
+            <% end %>
+          </td>
+          <td><%= user.created_at.strftime("%d.%m.%Y") %></td>
+          <td>
+            <%= link_to "View", admin_user_path(user), class: "btn btn-ghost" %>
+            <%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-ghost" %>
+            <% if user.banned? %>
+              <%= button_to "Unban", unban_admin_user_path(user), method: :patch, class: "btn btn-ghost" %>
+            <% else %>
+              <%= button_to "Ban", ban_admin_user_path(user), method: :patch, class: "btn btn-ghost" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,73 @@
+de:
+  hello: "Hallo Welt"
+
+  layout:
+    settings:
+      title: "Einstellungen"
+      dark_mode: "Dunkelmodus"
+      notifications: "Benachrichtigungen"
+      reduced_motion: "Reduzierte Bewegung"
+
+  home:
+    badge: "Für Minecraft-Serverbetreiber & Spieler"
+    hero_title: "Werbung ansehen."
+    hero_title_em: "Belohnung erhalten."
+    hero_title_rest: "Zu deinen eigenen Bedingungen."
+    lede: "Ads verbindet Spieler und Minecraft-Server durch einfache, freiwillige Werbung mit Belohnung — der Server legt die Ingame-Belohnung über sein eigenes Plugin fest, wir kümmern uns um die Werbung und die Bestätigung."
+    get_started: "Loslegen"
+    how_it_works: "So funktioniert's"
+    auth:
+      log_in_tab: "Anmelden"
+      sign_up_tab: "Registrieren"
+      email: "E-Mail"
+      password: "Passwort"
+      minecraft_nick: "Minecraft-Nickname"
+      confirm_password: "Passwort bestätigen"
+      log_in_submit: "Anmelden"
+      forgot_password: "Passwort vergessen?"
+      create_account: "Konto erstellen"
+      terms_note: "Mit der Fortsetzung stimmst du unseren Nutzungsbedingungen und der Datenschutzerklärung zu."
+    how:
+      title: "So funktioniert Ads"
+      lede: "Ein einfacher Kreislauf zwischen Spielern, Werbung und der eigenen Plugin-Logik deines Servers."
+      step1_title: "Spieler sieht sich eine Werbung an"
+      step1_body: "Der Spieler nimmt freiwillig teil und sieht sich eine kurze Werbung mit Belohnung auf der Ads-Plattform an — eine Belohnung wird vorab nicht garantiert."
+      step2_title: "Anspruch wird erstellt"
+      step2_body: "Sobald die Werbung als abgeschlossen bestätigt ist, erhält der Spieler einen kurzzeitig gültigen Anspruch (Claim)."
+      step3_title: "Plugin gewährt die Belohnung"
+      step3_body: "Das Plugin deines Servers prüft den Anspruch und vergibt die von dir konfigurierte Ingame-Belohnung."
+    footer_html: "© %{year} Ads — belohnte Werbung für Minecraft-Server."
+
+  dashboard:
+    welcome: "Willkommen, %{nick}"
+    admin_lede: "Verwalte Server, Vertragsanfragen und Moderation."
+    player_lede: "Wähle, was du als Nächstes tun möchtest."
+    manage_users_title: "Benutzer verwalten"
+    manage_users_body: "Rollen anzeigen, bearbeiten sowie Konten sperren oder entsperren."
+    servers_title: "Server"
+    servers_body: "Serveranträge prüfen und registrierte Server verwalten."
+    contract_requests_title: "Vertragsanfragen"
+    contract_requests_body: "Von Serverbetreibern eingereichte Vertragsanfragen prüfen."
+    fraud_flags_title: "Betrugsmeldungen"
+    fraud_flags_body: "Markierte Konten und verdächtige Aktivitäten untersuchen."
+    payouts_title: "Auszahlungen"
+    payouts_body: "Auszahlungsanfragen prüfen und verwalten."
+    own_server_title: "Betreibst du einen Server?"
+    own_server_body: "Registriere deinen Minecraft-Server und richte belohnte Werbung für deine Spieler ein."
+    watch_ad_title: "Werbung ansehen"
+    watch_ad_body: "Sieh dir eine belohnte Werbung an und erhalte deine Ingame-Belohnung auf einem verbundenen Server."
+
+  ads:
+    watch:
+      title: "Werbung ansehen"
+      no_servers: "Es gibt noch keine genehmigten Server — schau später noch einmal vorbei, sobald ein Server genehmigt wurde."
+      back_to_dashboard: "Zurück zur Übersicht"
+      pick_server_lede: "Wähle den Server, der deine Belohnung erhalten soll, und starte die Werbung."
+      server_label: "Server"
+      choose_server: "Server auswählen"
+      continue: "Weiter"
+      claim_for_html: "Die Belohnung wird für <strong>%{server}</strong> beansprucht."
+      claim_reward: "Belohnung einlösen"
+      pick_different_server: "Anderen Server wählen"
+      timer_remaining: "Noch %{seconds} s…"
+      ad_finished: "Werbung beendet — löse deine Belohnung ein!"

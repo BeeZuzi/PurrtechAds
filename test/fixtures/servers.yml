@@ -1,11 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# api_key/api_secret are set explicitly since the generate_api_credentials
+# before_create callback doesn't run for fixture-loaded rows.
 
-one:
-  user: one
-  name: MyString
-  description: MyText
+approved_server:
+  user: owner
+  name: SkyBlock Prague
+  description: Demo server for testing
+  status: approved
+  api_key: fixture_api_key_approved_1234567890
+  api_secret: fixture_api_secret_approved_1234567890abcdef1234567890abcdef
 
-two:
-  user: two
-  name: MyString
-  description: MyText
+pending_server:
+  user: owner
+  name: Pending Realm
+  description: Awaiting approval
+  status: pending
+  api_key: fixture_api_key_pending_1234567890
+  api_secret: fixture_api_secret_pending_1234567890abcdef1234567890abcdef

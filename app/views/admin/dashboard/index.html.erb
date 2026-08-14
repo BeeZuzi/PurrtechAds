@@ -1,0 +1,42 @@
+<div class="admin-main">
+  <h1>Admin</h1>
+  <p class="lede">Choose a section to manage.</p>
+
+  <div class="dashboard-choices">
+    <% if current_user.can_manage_users? %>
+      <%= link_to admin_users_path, class: "choice-card" do %>
+        <span class="choice-icon"><%= icon_gear_svg.html_safe %></span>
+        <h2>Manage users</h2>
+        <p>View, edit roles, and ban or unban accounts.</p>
+      <% end %>
+    <% end %>
+
+    <%= link_to admin_servers_path, class: "choice-card" do %>
+      <span class="choice-icon"><%= icon_server_svg.html_safe %></span>
+      <h2>Servers</h2>
+      <p>Review server applications and manage registered servers.</p>
+    <% end %>
+
+    <%= link_to admin_contract_requests_path, class: "choice-card" do %>
+      <span class="choice-icon"><%= icon_play_svg.html_safe %></span>
+      <h2>Contract requests</h2>
+      <p>Review submitted contract requests from server owners.</p>
+    <% end %>
+
+    <% if current_user.admin? || current_user.superadmin? %>
+      <%= link_to admin_fraud_flags_path, class: "choice-card" do %>
+        <span class="choice-icon"><%= icon_gear_svg.html_safe %></span>
+        <h2>Fraud flags</h2>
+        <p>Investigate flagged accounts and suspicious activity.</p>
+      <% end %>
+    <% end %>
+
+    <% if current_user.superadmin? %>
+      <%= link_to admin_payouts_path, class: "choice-card" do %>
+        <span class="choice-icon"><%= icon_gear_svg.html_safe %></span>
+        <h2>Payouts</h2>
+        <p>Review and manage payout requests.</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

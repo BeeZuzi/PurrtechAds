@@ -3,6 +3,7 @@ class ProfilesController < ApplicationController
 
   def show
     @user = current_user
+    @recent_claims = @user.claims.includes(:server).order(watched_at: :desc).limit(5)
   end
 
   def edit
@@ -22,6 +23,6 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:user).permit(:email, :minecraft_nick, :password, :password_confirmation)
+    params.require(:user).permit(:email, :minecraft_nick, :minecraft_uuid, :password, :password_confirmation)
   end
 end

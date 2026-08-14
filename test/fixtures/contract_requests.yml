@@ -1,31 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  server: one
-  entity_type: MyString
-  legal_name: MyString
-  country_code: MyString
-  tax_id: MyString
-  registered_address: MyText
-  contact_email: MyString
-  phone: MyString
-  preferred_currency: MyString
-  payout_method: MyString
-  message: MyText
-  status: MyString
-
-two:
-  user: two
-  server: two
-  entity_type: MyString
-  legal_name: MyString
-  country_code: MyString
-  tax_id: MyString
-  registered_address: MyText
-  contact_email: MyString
-  phone: MyString
-  preferred_currency: MyString
-  payout_method: MyString
-  message: MyText
-  status: MyString
+pending_request:
+  user: owner
+  server: approved_server
+  entity_type: individual
+  legal_name: Jane Doe
+  country_code: CZ
+  contact_email: jane@example.com
+  registered_address: Wenceslas Square 1, Prague
+  preferred_currency: USD
+  payout_method: bank_transfer
+  status: pending

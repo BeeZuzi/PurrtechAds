@@ -1,0 +1,9 @@
+<%= select_tag :locale,
+    options_for_select(
+      [["EN — English", "en"], ["CS — Čeština", "cs"], ["DE — Deutsch", "de"]],
+      I18n.locale.to_s
+    ),
+    class: "lang-select",
+    "aria-label": "Site language",
+    id: "lang-select",
+    data: { controller: "locale", action: "change->locale#navigate" } %>

@@ -2,7 +2,7 @@
 
 <header class="topbar">
   <div class="topbar-left">
-    <%= link_to icon_home_svg.html_safe, dashboard_path, class: "icon-btn", "aria-label": "Back to dashboard" %>
+    <%= render "shared/nav_icons" %>
   </div>
   <div class="topbar-right">
     <%= button_to "Log out", session_path, method: :delete, class: "btn btn-ghost", form: { class: "logout-form" } %>
@@ -15,9 +15,16 @@
     <h1><%= @user.minecraft_nick %></h1>
     <p class="profile-email"><%= @user.email %></p>
 
+    <% if @user.confirmed? %>
+      <span class="status-badge status-approved">Email confirmed</span>
+    <% else %>
+      <span class="status-badge status-pending">Email not confirmed</span>
+      <%= button_to "Resend confirmation email", resend_email_confirmation_path, class: "btn btn-ghost btn-sm" %>
+    <% end %>
+
     <div class="profile-stats">
       <div class="stat">
-        <span class="stat-value">0</span>
+        <span class="stat-value"><%= @user.claims.count %></span>
         <span class="stat-label">Ads watched</span>
       </div>
       <div class="stat">
@@ -25,7 +32,7 @@
         <span class="stat-label">Member since</span>
       </div>
       <div class="stat">
-        <span class="stat-value">0</span>
+        <span class="stat-value"><%= @user.claims.select(:server_id).distinct.count %></span>
         <span class="stat-label">Supported servers</span>
       </div>
     </div>
@@ -35,13 +42,32 @@
 
   <section class="profile-section">
     <h2 class="section-title">Recent activity</h2>
-    <p class="section-lede">Your reward claim history will show up here once your server plugin is connected.</p>
 
-    <div class="empty-state">
-      <div class="empty-state-icon"><%= icon_activity_svg.html_safe %></div>
-      <h3>No activity yet</h3>
-      <p>Watch your first rewarded ad to see your claim history here.</p>
-      <%= link_to "Watch an ad", watch_ad_path, class: "btn btn-primary" %>
-    </div>
+    <% if @recent_claims.present? %>
+      <p class="section-lede">Your most recent reward claims.</p>
+
+      <div class="server-list">
+        <% @recent_claims.each do |claim| %>
+          <div class="server-item">
+            <div class="server-item-info">
+              <h3><%= claim.server.name %></h3>
+              <p><%= claim.watched_at.strftime("%d.%m.%Y %H:%M") %></p>
+            </div>
+            <div class="server-item-actions">
+              <span class="status-badge status-<%= claim.status %>"><%= claim.status.humanize %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="section-lede">Your reward claim history will show up here once your server plugin is connected.</p>
+
+      <div class="empty-state">
+        <div class="empty-state-icon"><%= icon_activity_svg.html_safe %></div>
+        <h3>No activity yet</h3>
+        <p>Watch your first rewarded ad to see your claim history here.</p>
+        <%= link_to "Watch an ad", watch_ad_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </section>
 </main>

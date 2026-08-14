@@ -2,34 +2,21 @@
 
 <header class="topbar">
   <div class="topbar-left">
-   
-    <%= form_tag "#", method: :get, class: "lang-form" do %>
-      <%= select_tag :locale,
-          options_for_select(
-            [["EN — English", "en"], ["CS — Čeština (soon)", "cs"], ["DE — Deutsch (soon)", "de"]],
-            "en"
-          ),
-          class: "lang-select",
-          "aria-label": "Site language",
-          id: "lang-select",
-          disabled: false %>
-    <% end %>
+    <%= render "shared/locale_switcher" %>
   </div>
   <div class="topbar-right"></div>
 </header>
 
 <main>
   <section class="hero">
-    <span class="hero-badge">For Minecraft server owners &amp; players</span>
-    <h1>Watch an ad. <em>Earn a reward.</em> On your own terms.</h1>
+    <span class="hero-badge"><%= t("home.badge") %></span>
+    <h1><%= t("home.hero_title") %> <em><%= t("home.hero_title_em") %></em> <%= t("home.hero_title_rest") %></h1>
     <p class="lede">
-      Ads connects players and Minecraft servers through simple, opt-in rewarded
-      advertising — servers decide the in-game reward through their own plugin,
-      we handle the ad and the claim.
+      <%= t("home.lede") %>
     </p>
     <div class="hero-actions">
-      <%= link_to "Get started", "#auth", class: "btn btn-primary" %>
-      <%= link_to "How it works", "#how-it-works", class: "btn btn-ghost" %>
+      <%= link_to t("home.get_started"), "#auth", class: "btn btn-primary" %>
+      <%= link_to t("home.how_it_works"), "#how-it-works", class: "btn btn-ghost" %>
     </div>
   </section>
 
@@ -41,28 +28,29 @@
                 data-tab="login"
                 data-theme-target="authTab"
                 data-action="click->theme#switchAuthTab"
-                role="tab" aria-selected="false">Log in</button>
+                role="tab" aria-selected="false"><%= t("home.auth.log_in_tab") %></button>
 
         <button type="button"
                 class="auth-tab active"
                 data-tab="signin"
                 data-theme-target="authTab"
                 data-action="click->theme#switchAuthTab"
-                role="tab" aria-selected="true">Sign up</button>
+                role="tab" aria-selected="true"><%= t("home.auth.sign_up_tab") %></button>
       </div>
 
       <%# LOGIN FORM %>
       <%= form_with url: session_path, method: :post, id: "login-form", local: true,
           class: "auth-form", data: { theme_target: "loginForm" } do |f| %>
         <div class="field">
-          <%= f.label :email, "Email" %>
+          <%= f.label :email, t("home.auth.email") %>
           <%= f.email_field :email, placeholder: "you@example.com", autocomplete: "email", required: true %>
         </div>
         <div class="field">
-          <%= f.label :password, "Password" %>
+          <%= f.label :password, t("home.auth.password") %>
           <%= f.password_field :password, placeholder: "••••••••", autocomplete: "current-password", required: true %>
         </div>
-        <%= f.submit "Log in", class: "btn btn-primary auth-submit" %>
+        <%= f.submit t("home.auth.log_in_submit"), class: "btn btn-primary auth-submit" %>
+        <%= link_to t("home.auth.forgot_password"), new_password_reset_path, class: "auth-note" %>
       <% end %>
 
       <%# SIGNUP FORM %>
@@ -76,81 +64,52 @@
           </ul>
         <% end %>
         <div class="field">
-          <%= f.label :email, "Email" %>
+          <%= f.label :email, t("home.auth.email") %>
           <%= f.email_field :email, placeholder: "you@example.com", autocomplete: "email", required: true %>
         </div>
         <div class="field">
-          <%= f.label :minecraft_nick, "Minecraft nick" %>
+          <%= f.label :minecraft_nick, t("home.auth.minecraft_nick") %>
           <%= f.text_field :minecraft_nick, placeholder: "Steve123", autocomplete: "username", required: true %>
         </div>
         <div class="field">
-          <%= f.label :password, "Password" %>
+          <%= f.label :password, t("home.auth.password") %>
           <%= f.password_field :password, placeholder: "••••••••", autocomplete: "new-password", required: true, minlength: 8 %>
         </div>
         <div class="field">
-          <%= f.label :password_confirmation, "Confirm password" %>
+          <%= f.label :password_confirmation, t("home.auth.confirm_password") %>
           <%= f.password_field :password_confirmation, placeholder: "••••••••", autocomplete: "new-password", required: true %>
         </div>
-        <%= f.submit "Create account", class: "btn btn-primary auth-submit" %>
+        <%= f.submit t("home.auth.create_account"), class: "btn btn-primary auth-submit" %>
       <% end %>
 
-      <p class="auth-note">By continuing you agree to our terms and privacy policy.</p>
+      <p class="auth-note"><%= t("home.auth.terms_note") %></p>
     </div>
   </div>
 
   <section class="section" id="how-it-works">
-    <h2 class="section-title">How Ads works</h2>
-    <p class="section-lede">A simple loop between players, ads, and your server's own plugin logic.</p>
+    <h2 class="section-title"><%= t("home.how.title") %></h2>
+    <p class="section-lede"><%= t("home.how.lede") %></p>
 
     <div class="feature-row">
       <article class="feature-card wide">
         <span class="feature-num">01</span>
-        <h3>Player watches an ad</h3>
-        <p>The player opts in and watches a short rewarded ad on the Ads platform — no reward is promised by us in advance.</p>
+        <h3><%= t("home.how.step1_title") %></h3>
+        <p><%= t("home.how.step1_body") %></p>
       </article>
       <article class="feature-card">
         <span class="feature-num">02</span>
-        <h3>Claim is created</h3>
-        <p>Once the ad is confirmed complete, a short-lived claim is issued for that player.</p>
+        <h3><%= t("home.how.step2_title") %></h3>
+        <p><%= t("home.how.step2_body") %></p>
       </article>
       <article class="feature-card">
         <span class="feature-num">03</span>
-        <h3>Plugin grants reward</h3>
-        <p>Your server's plugin checks the claim and grants whatever reward you've configured in-game.</p>
+        <h3><%= t("home.how.step3_title") %></h3>
+        <p><%= t("home.how.step3_body") %></p>
       </article>
     </div>
   </section>
 </main>
 
-<div data-controller="theme">
-  <button type="button" class="settings-fab" data-theme-target="fab" data-action="click->theme#togglePanel" aria-label="Open settings" aria-expanded="false">
-    <%= icon_gear_svg.html_safe %>
-  </button>
+<%= render "shared/settings_panel" %>
 
-  <div class="settings-panel" data-theme-target="panel">
-    <h3>Settings</h3>
-
-    <div class="setting-row">
-      <span class="setting-label">
-        <%= icon_sun_svg.html_safe %> Dark mode
-      </span>
-      <button type="button" class="switch" data-theme-target="themeSwitch" data-action="click->theme#toggleTheme" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
-    </div>
-
-    <div class="setting-row">
-      <span class="setting-label">
-        <%= icon_bell_svg.html_safe %> Notifications
-      </span>
-      <button type="button" class="switch on" data-theme-target="notifSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="true" aria-label="Toggle notifications"></button>
-    </div>
-
-    <div class="setting-row">
-      <span class="setting-label">
-        <%= icon_wind_svg.html_safe %> Reduced motion
-      </span>
-      <button type="button" class="switch" data-theme-target="motionSwitch" data-action="click->theme#toggleSwitch" role="switch" aria-checked="false" aria-label="Toggle reduced motion"></button>
-    </div>
-  </div>
-</div>
-
-<footer>© <%= Date.current.year %> Ads — rewarded ads for Minecraft servers.</footer>
+<footer><%= t("home.footer_html", year: Date.current.year) %></footer>

@@ -1,0 +1,73 @@
+cs:
+  hello: "Ahoj světe"
+
+  layout:
+    settings:
+      title: "Nastavení"
+      dark_mode: "Tmavý režim"
+      notifications: "Oznámení"
+      reduced_motion: "Omezené animace"
+
+  home:
+    badge: "Pro majitele Minecraft serverů a hráče"
+    hero_title: "Zhlédni reklamu."
+    hero_title_em: "Získej odměnu."
+    hero_title_rest: "Za svých podmínek."
+    lede: "Ads propojuje hráče a Minecraft servery přes jednoduchou, dobrovolnou odměňovanou reklamu — server si sám určí odměnu ve hře přes vlastní plugin, my se staráme o reklamu a její potvrzení."
+    get_started: "Začít"
+    how_it_works: "Jak to funguje"
+    auth:
+      log_in_tab: "Přihlásit se"
+      sign_up_tab: "Registrace"
+      email: "E-mail"
+      password: "Heslo"
+      minecraft_nick: "Minecraft nick"
+      confirm_password: "Potvrzení hesla"
+      log_in_submit: "Přihlásit se"
+      forgot_password: "Zapomenuté heslo?"
+      create_account: "Vytvořit účet"
+      terms_note: "Pokračováním souhlasíš s našimi podmínkami a zásadami ochrany osobních údajů."
+    how:
+      title: "Jak Ads funguje"
+      lede: "Jednoduchý koloběh mezi hráči, reklamou a logikou pluginu tvého serveru."
+      step1_title: "Hráč zhlédne reklamu"
+      step1_body: "Hráč se dobrovolně zapojí a zhlédne krátkou odměňovanou reklamu na platformě Ads — odměnu předem negarantujeme."
+      step2_title: "Vznikne nárok na odměnu"
+      step2_body: "Jakmile je zhlédnutí reklamy potvrzeno, hráči vznikne krátkodobě platný nárok na odměnu (claim)."
+      step3_title: "Plugin udělí odměnu"
+      step3_body: "Plugin tvého serveru nárok ověří a udělí odměnu, kterou sis ve hře sám nastavil."
+    footer_html: "© %{year} Ads — odměňovaná reklama pro Minecraft servery."
+
+  dashboard:
+    welcome: "Vítej, %{nick}"
+    admin_lede: "Spravuj servery, žádosti o smlouvu a moderaci."
+    player_lede: "Vyber si, co chceš dělat dál."
+    manage_users_title: "Správa uživatelů"
+    manage_users_body: "Zobrazit, upravit role a banovat nebo odbanovat účty."
+    servers_title: "Servery"
+    servers_body: "Posuzuj žádosti o servery a spravuj registrované servery."
+    contract_requests_title: "Žádosti o smlouvu"
+    contract_requests_body: "Posuzuj žádosti o smlouvu podané majiteli serverů."
+    fraud_flags_title: "Podezřelá aktivita"
+    fraud_flags_body: "Prošetřuj označené účty a podezřelou aktivitu."
+    payouts_title: "Výplaty"
+    payouts_body: "Posuzuj a spravuj žádosti o výplatu."
+    own_server_title: "Máš vlastní server?"
+    own_server_body: "Zaregistruj svůj Minecraft server a nastav odměňovanou reklamu pro své hráče."
+    watch_ad_title: "Zhlédnout reklamu"
+    watch_ad_body: "Zhlédni odměňovanou reklamu a získej odměnu ve hře na připojeném serveru."
+
+  ads:
+    watch:
+      title: "Zhlédnout reklamu"
+      no_servers: "Zatím nejsou žádné schválené servery — zkus to znovu, až bude nějaký server schválen."
+      back_to_dashboard: "Zpět na přehled"
+      pick_server_lede: "Vyber server, kterému má odměna patřit, a spusť reklamu."
+      server_label: "Server"
+      choose_server: "Vyber server"
+      continue: "Pokračovat"
+      claim_for_html: "Odměna bude přiznána serveru <strong>%{server}</strong>."
+      claim_reward: "Získat odměnu"
+      pick_different_server: "Vybrat jiný server"
+      timer_remaining: "Zbývá %{seconds} s…"
+      ad_finished: "Reklama skončila — vyzvedni si odměnu!"

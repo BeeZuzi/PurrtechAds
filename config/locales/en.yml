@@ -1,31 +1,73 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
   hello: "Hello world"
+
+  layout:
+    settings:
+      title: "Settings"
+      dark_mode: "Dark mode"
+      notifications: "Notifications"
+      reduced_motion: "Reduced motion"
+
+  home:
+    badge: "For Minecraft server owners & players"
+    hero_title: "Watch an ad."
+    hero_title_em: "Earn a reward."
+    hero_title_rest: "On your own terms."
+    lede: "Ads connects players and Minecraft servers through simple, opt-in rewarded advertising — servers decide the in-game reward through their own plugin, we handle the ad and the claim."
+    get_started: "Get started"
+    how_it_works: "How it works"
+    auth:
+      log_in_tab: "Log in"
+      sign_up_tab: "Sign up"
+      email: "Email"
+      password: "Password"
+      minecraft_nick: "Minecraft nick"
+      confirm_password: "Confirm password"
+      log_in_submit: "Log in"
+      forgot_password: "Forgot password?"
+      create_account: "Create account"
+      terms_note: "By continuing you agree to our terms and privacy policy."
+    how:
+      title: "How Ads works"
+      lede: "A simple loop between players, ads, and your server's own plugin logic."
+      step1_title: "Player watches an ad"
+      step1_body: "The player opts in and watches a short rewarded ad on the Ads platform — no reward is promised by us in advance."
+      step2_title: "Claim is created"
+      step2_body: "Once the ad is confirmed complete, a short-lived claim is issued for that player."
+      step3_title: "Plugin grants reward"
+      step3_body: "Your server's plugin checks the claim and grants whatever reward you've configured in-game."
+    footer_html: "© %{year} Ads — rewarded ads for Minecraft servers."
+
+  dashboard:
+    welcome: "Welcome, %{nick}"
+    admin_lede: "Manage servers, contract requests, and moderation."
+    player_lede: "Choose what you want to do next."
+    manage_users_title: "Manage users"
+    manage_users_body: "View, edit roles, and ban or unban accounts."
+    servers_title: "Servers"
+    servers_body: "Review server applications and manage registered servers."
+    contract_requests_title: "Contract requests"
+    contract_requests_body: "Review submitted contract requests from server owners."
+    fraud_flags_title: "Fraud flags"
+    fraud_flags_body: "Investigate flagged accounts and suspicious activity."
+    payouts_title: "Payouts"
+    payouts_body: "Review and manage payout requests."
+    own_server_title: "Do you own a server?"
+    own_server_body: "Register your Minecraft server and set up rewarded ads for your players."
+    watch_ad_title: "Watch an ad"
+    watch_ad_body: "Watch a rewarded ad and claim your in-game reward on a connected server."
+
+  ads:
+    watch:
+      title: "Watch an ad"
+      no_servers: "There are no approved servers yet — check back once a server owner has been approved."
+      back_to_dashboard: "Back to dashboard"
+      pick_server_lede: "Pick which server should receive your reward, then start the ad."
+      server_label: "Server"
+      choose_server: "Choose a server"
+      continue: "Continue"
+      claim_for_html: "Reward will be claimed for <strong>%{server}</strong>."
+      claim_reward: "Claim reward"
+      pick_different_server: "Pick a different server"
+      timer_remaining: "%{seconds}s remaining…"
+      ad_finished: "Ad finished — claim your reward!"

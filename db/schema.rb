@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_18_182325) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_14_155749) do
+  create_table "claims", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "failed_at"
+    t.string "ip_address"
+    t.datetime "redeemed_at"
+    t.integer "server_id", null: false
+    t.string "status", default: "pending", null: false
+    t.string "token", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.datetime "watched_at", null: false
+    t.index ["ip_address"], name: "index_claims_on_ip_address"
+    t.index ["server_id"], name: "index_claims_on_server_id"
+    t.index ["status"], name: "index_claims_on_status"
+    t.index ["token"], name: "index_claims_on_token", unique: true
+    t.index ["user_id"], name: "index_claims_on_user_id"
+  end
+
   create_table "contract_requests", force: :cascade do |t|
     t.string "contact_email", null: false
     t.string "country_code", null: false
@@ -31,6 +50,32 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_18_182325) do
     t.index ["user_id"], name: "index_contract_requests_on_user_id"
   end
 
+  create_table "fraud_flags", force: :cascade do |t|
+    t.integer "claim_id"
+    t.datetime "created_at", null: false
+    t.text "details"
+    t.string "reason", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["claim_id"], name: "index_fraud_flags_on_claim_id"
+    t.index ["status"], name: "index_fraud_flags_on_status"
+    t.index ["user_id"], name: "index_fraud_flags_on_user_id"
+  end
+
+  create_table "payouts", force: :cascade do |t|
+    t.integer "amount_cents", null: false
+    t.datetime "created_at", null: false
+    t.string "currency", default: "USD", null: false
+    t.text "notes"
+    t.datetime "paid_at"
+    t.integer "server_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "updated_at", null: false
+    t.index ["server_id"], name: "index_payouts_on_server_id"
+    t.index ["status"], name: "index_payouts_on_status"
+  end
+
   create_table "servers", force: :cascade do |t|
     t.string "api_key", null: false
     t.string "api_secret", null: false
@@ -46,18 +91,29 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_18_182325) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.datetime "banned_at"
+    t.datetime "banned_until"
+    t.datetime "confirmed_at"
     t.datetime "created_at", null: false
     t.string "email", null: false
     t.string "minecraft_nick", null: false
+    t.string "minecraft_uuid"
     t.string "password_digest", null: false
     t.string "role", default: "user", null: false
     t.datetime "updated_at", null: false
+    t.index ["banned_at"], name: "index_users_on_banned_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["minecraft_nick"], name: "index_users_on_minecraft_nick", unique: true
+    t.index ["minecraft_uuid"], name: "index_users_on_minecraft_uuid", unique: true
     t.index ["role"], name: "index_users_on_role"
   end
 
+  add_foreign_key "claims", "servers"
+  add_foreign_key "claims", "users"
   add_foreign_key "contract_requests", "servers"
   add_foreign_key "contract_requests", "users"
+  add_foreign_key "fraud_flags", "claims"
+  add_foreign_key "fraud_flags", "users"
+  add_foreign_key "payouts", "servers"
   add_foreign_key "servers", "users"
 end

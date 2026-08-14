@@ -1,0 +1,25 @@
+<% content_for :title, "Set a new password — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= link_to icon_home_svg.html_safe, root_path, class: "icon-btn", "aria-label": "Home" %>
+  </div>
+</header>
+
+<main class="profile-main">
+  <section class="auth-card edit-card">
+    <h1 class="section-title">Set a new password</h1>
+
+    <%= form_with url: update_password_reset_path(@token), method: :patch, scope: :user, local: true do |f| %>
+      <div class="field">
+        <%= f.label :password, "New password" %>
+        <%= f.password_field :password, required: true, minlength: 8, autocomplete: "new-password" %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation, "Confirm new password" %>
+        <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
+      </div>
+      <%= f.submit "Update password", class: "btn btn-primary auth-submit" %>
+    <% end %>
+  </section>
+</main>

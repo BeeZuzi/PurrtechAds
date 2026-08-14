@@ -1,0 +1,24 @@
+<% content_for :title, "Reset password — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= link_to icon_home_svg.html_safe, root_path, class: "icon-btn", "aria-label": "Home" %>
+  </div>
+</header>
+
+<main class="profile-main">
+  <section class="auth-card edit-card">
+    <h1 class="section-title">Reset your password</h1>
+    <p class="lede">Enter your account email and we'll send you a reset link.</p>
+
+    <%= form_with url: password_reset_path, method: :post, local: true do %>
+      <div class="field">
+        <%= label_tag :email, "Email" %>
+        <%= email_field_tag :email, nil, placeholder: "you@example.com", required: true %>
+      </div>
+      <%= submit_tag "Send reset link", class: "btn btn-primary auth-submit" %>
+    <% end %>
+
+    <%= link_to "Cancel", root_path, class: "btn btn-ghost", style: "margin-top: var(--space-3); width: 100%;" %>
+  </section>
+</main>

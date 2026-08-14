@@ -11,5 +11,10 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    FIXTURE_PASSWORD = "password123"
+
+    def sign_in_as(user, password: FIXTURE_PASSWORD)
+      post session_path, params: { email: user.email, password: password }
+    end
   end
 end

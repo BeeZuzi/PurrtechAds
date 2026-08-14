@@ -1,0 +1,39 @@
+<div class="admin-main">
+  <h1>Fraud flags</h1>
+
+  <div class="filter-tabs">
+    <%= link_to "All", admin_fraud_flags_path, class: params[:status].blank? ? "active" : "" %>
+    <% FraudFlag::STATUSES.each do |status| %>
+      <%= link_to status.capitalize, admin_fraud_flags_path(status: status), class: params[:status] == status ? "active" : "" %>
+    <% end %>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Reason</th>
+        <th>Server</th>
+        <th>Status</th>
+        <th>Flagged</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @fraud_flags.each do |flag| %>
+        <tr>
+          <td><%= flag.user.minecraft_nick %> (<%= flag.user.email %>)</td>
+          <td><%= flag.reason.humanize %></td>
+          <td><%= flag.claim&.server&.name || "—" %></td>
+          <td><span class="status-badge status-<%= flag.status %>"><%= flag.status %></span></td>
+          <td><%= flag.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+          <td><%= link_to "View", admin_fraud_flag_path(flag), class: "btn btn-ghost" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if @fraud_flags.empty? %>
+    <p class="lede">No fraud flags for this filter.</p>
+  <% end %>
+</div>
