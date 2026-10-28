@@ -13,6 +13,23 @@
     <p class="lede"><%= t("server_payouts.lede", reward: Payout.format_cents(PayoutPolicy.reward_cents, PayoutPolicy.currency), hold: PayoutPolicy.hold_days) %></p>
   </section>
 
+  <div class="payout-summary payout-views">
+    <div class="stat">
+      <span class="stat-value"><%= @server.confirmed_views_count %></span>
+      <span class="stat-label"><%= t("server_payouts.views_total") %></span>
+    </div>
+    <div class="stat">
+      <span class="stat-value"><%= @server.views_since_last_payout %></span>
+      <span class="stat-label">
+        <% if @last_payout %>
+          <%= t("server_payouts.views_since", date: l(@last_payout.created_at.to_date, format: "%d.%m.%Y")) %>
+        <% else %>
+          <%= t("server_payouts.views_since_none") %>
+        <% end %>
+      </span>
+    </div>
+  </div>
+
   <div class="payout-summary">
     <div class="stat">
       <span class="stat-value"><%= Payout.format_cents(@server.balance_cents, PayoutPolicy.currency) %></span>

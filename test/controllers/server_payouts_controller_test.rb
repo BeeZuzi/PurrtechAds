@@ -20,6 +20,36 @@ class ServerPayoutsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form[action='#{server_payouts_path(@server)}'] button, form[action='#{server_payouts_path(@server)}'] input[type=submit]"
   end
 
+  test "the owner sees ads in total and ads since the last payout" do
+    3.times { earn(1500, age: 60.days) }
+    payout = Payout.issue!(@server)
+    payout.update!(created_at: 30.days.ago)
+    2.times { earn(100, age: 5.days) }
+    sign_in_as(users(:owner))
+
+    get server_payouts_url(@server)
+
+    assert_equal 5, @server.confirmed_views_count
+    assert_equal 2, @server.views_since_last_payout
+    assert_select ".payout-views .stat-value", text: "5"
+    assert_select ".payout-views .stat-value", text: "2"
+  end
+
+  test "without a payout every view counts as since the last payout" do
+    2.times { earn(100) }
+    assert_equal 2, @server.views_since_last_payout
+  end
+
+  test "a failed payout does not reset the count" do
+    earn(1500, age: 60.days)
+    payout = Payout.issue!(@server)
+    payout.update!(created_at: 30.days.ago)
+    payout.mark_failed!
+    earn(100, age: 5.days)
+
+    assert_equal 2, @server.reload.views_since_last_payout
+  end
+
   test "the owner sees why payout is not possible yet" do
     earn(100)
     sign_in_as(users(:owner))

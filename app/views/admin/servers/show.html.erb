@@ -15,6 +15,13 @@
       </span>
     </p>
 
+    <h2>Reklamy a výplaty</h2>
+    <p><strong>Zhlédnuté reklamy:</strong> <%= @server.confirmed_views_count %> (vyzvednuto ve hře: <%= @server.redeemed_views_count %>)</p>
+    <p><strong>K vyplacení:</strong> <%= Payout.format_cents(@server.owed_cents, PayoutPolicy.currency) %>
+      (připraveno: <%= Payout.format_cents(@server.balance_cents, PayoutPolicy.currency) %>)</p>
+    <p><strong>V žádosti o výplatu:</strong> <%= Payout.format_cents(@server.pending_payout_cents, PayoutPolicy.currency) %></p>
+    <p><strong>Vyplaceno celkem:</strong> <%= Payout.format_cents(@server.paid_out_cents, PayoutPolicy.currency) %></p>
+
     <h2>API přístupové údaje</h2>
     <p><strong>API Key:</strong> <code><%= @server.api_key %></code></p>
     <p><strong>API Secret:</strong> <code><%= @server.api_secret %></code></p>
@@ -28,5 +35,49 @@
     <%= f.submit "Uložit", class: "btn btn-primary" %>
   <% end %>
 
-  <%= link_to "Zpět na seznam", admin_servers_path, class: "banned-back-link" %>
+  <h2 class="sheet-title">Přehled výplat</h2>
+  <div class="table-scroll">
+    <table class="sheet">
+      <thead>
+        <tr>
+          <th class="num">#</th>
+          <th>Datum žádosti</th>
+          <th class="num">Částka</th>
+          <th>Stav</th>
+          <th>Vyplaceno dne</th>
+          <th class="num">Reklam</th>
+          <th>Žádost od</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payouts.each do |payout| %>
+          <tr class="sheet-<%= payout.status %>">
+            <td class="num"><%= link_to payout.id, admin_payout_path(payout) %></td>
+            <td><%= payout.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+            <td class="num"><%= Payout.format_cents(payout.amount_cents, payout.currency) %></td>
+            <td>
+              <%= { "paid" => "✔ Vyplaceno", "failed" => "✖ Selhalo", "pending" => "⏳ Čeká na zaplacení" }.fetch(payout.status) %>
+            </td>
+            <td><%= payout.paid_at ? payout.paid_at.strftime("%d.%m.%Y %H:%M") : "—" %></td>
+            <td class="num"><%= @claims_per_payout.fetch(payout.id, 0) %></td>
+            <td><%= payout.requested_by&.minecraft_nick || "admin" %></td>
+          </tr>
+        <% end %>
+        <% if @payouts.empty? %>
+          <tr><td colspan="7" class="sheet-empty">Zatím žádné výplaty.</td></tr>
+        <% end %>
+      </tbody>
+      <% if @payouts.any? %>
+        <tfoot>
+          <tr>
+            <td colspan="2">Vyplaceno celkem</td>
+            <td class="num"><%= Payout.format_cents(@server.paid_out_cents, PayoutPolicy.currency) %></td>
+            <td colspan="4">Čeká na zaplacení: <%= Payout.format_cents(@server.pending_payout_cents, PayoutPolicy.currency) %></td>
+          </tr>
+        </tfoot>
+      <% end %>
+    </table>
+  </div>
+
+  <%= link_to "Zpět na seznam", admin_servers_path, class: "back-link" %>
 </main>

@@ -8,6 +8,7 @@ class ServerPayoutsController < ApplicationController
     @contract = @server.payout_contract
     @blocker = @server.approved? ? @server.payout_blocker(contract: @contract) : :not_approved
     @payouts = @server.payouts.order(created_at: :desc)
+    @last_payout = @server.last_payout
   end
 
   def create

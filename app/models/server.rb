@@ -33,6 +33,40 @@ class Server < ApplicationRecord
     unpaid_confirmed_claims.sum(:reward_cents) - balance_cents
   end
 
+  # Ad views the ad network confirmed, and how many of them the player already collected in game.
+  def confirmed_views_count
+    claims.where.not(revenue_cents: nil).count
+  end
+
+  def redeemed_views_count
+    claims.redeemed.where.not(revenue_cents: nil).count
+  end
+
+  # The newest payout that was not a failure; the point owners count "since the last payout" from.
+  def last_payout
+    payouts.where.not(status: "failed").order(created_at: :desc).first
+  end
+
+  def views_since_last_payout
+    since = last_payout&.created_at
+    views = claims.where.not(revenue_cents: nil)
+    since ? views.where("claims.watched_at > ?", since).count : views.count
+  end
+
+  # Everything earned and not yet in a payout (ready to pay + still on hold).
+  def owed_cents
+    balance_cents + held_cents
+  end
+
+  # In payout requests that wait for the money to be sent.
+  def pending_payout_cents
+    payouts.pending.sum(:amount_cents)
+  end
+
+  def paid_out_cents
+    payouts.paid.sum(:amount_cents)
+  end
+
   # What the ad network pays us for the unpaid claims, in the payout currency.
   # Compare with balance_cents + held_cents to see our margin.
   def unpaid_revenue_cents

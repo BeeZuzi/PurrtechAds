@@ -592,3 +592,29 @@ footer p { margin-inline: auto; }
 .payout-heading { margin-bottom: var(--space-4); font-size: var(--text-lg); }
 .payout-history .admin-table { width: 100%; }
 .payout-history .lede { color: var(--color-text-muted); }
+
+/* Wide admin tables scroll sideways instead of overflowing the page */
+.table-scroll { overflow-x: auto; }
+.admin-table-compact th, .admin-table-compact td { white-space: nowrap; }
+
+/* Clickable table rows */
+.admin-table tr.row-link { cursor: pointer; }
+.admin-table tr.row-link:hover td { background: var(--color-surface-offset); }
+.row-link-anchor { color: inherit; font-weight: 600; text-decoration: none; }
+.row-link-anchor:hover { text-decoration: underline; }
+
+/* Spreadsheet-style table (payout overview) */
+.sheet-title { margin: var(--space-12) 0 var(--space-3); font-size: var(--text-lg); }
+.sheet { width: 100%; border-collapse: collapse; font-size: var(--text-sm); font-variant-numeric: tabular-nums; background: var(--color-surface); border: 1px solid var(--color-border); }
+.sheet th, .sheet td { border: 1px solid var(--color-divider); padding: var(--space-2) var(--space-3); text-align: left; white-space: nowrap; }
+.sheet thead th { position: sticky; top: 0; background: var(--color-surface-offset-2); font-weight: 600; }
+.sheet tbody tr:nth-child(even) td { background: var(--color-surface-offset); }
+.sheet tbody tr:hover td { background: var(--color-primary-highlight); }
+.sheet .num { text-align: right; }
+.sheet tfoot td { font-weight: 600; background: var(--color-surface-offset-2); }
+.sheet a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.sheet-empty { text-align: center !important; color: var(--color-text-muted); }
+.sheet-failed td { color: var(--color-text-muted); }
+
+.back-link { display: inline-block; margin-top: var(--space-6); color: var(--color-text-muted); text-decoration: underline; text-underline-offset: 3px; }
+.back-link:hover { color: var(--color-text); }
