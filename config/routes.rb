@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
   resources :servers, only: [:index, :new, :create, :show, :edit, :update] do
     resource :contract_request, only: [:new, :create], controller: "contract_requests"
+    resources :payouts, only: [:index, :create], controller: "server_payouts"
   end
 
   # --- API pro plugin komunikaci a server dashboard ---

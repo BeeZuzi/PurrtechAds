@@ -1,0 +1,27 @@
+de:
+  server_payouts:
+    title: "Auszahlungen"
+    heading: "Auszahlungen für %{server}"
+    lede: "Der Server erhält pro vom Partner bestätigter Werbeansicht feste %{reward}. Die Belohnung zählt nach %{hold} Tagen."
+    ready: "Zur Auszahlung bereit"
+    held: "Wartet auf die Haltefrist (%{days} Tage)"
+    request: "Auszahlung anfordern"
+    request_hint: "Wir zahlen das gesamte bereite Guthaben an die Daten aus deinem genehmigten Vertrag aus."
+    request_contract: "Vertrag anfragen"
+    requested: "Wir haben deine Auszahlungsanfrage über %{amount} erhalten. Das Geld geht an die Daten aus deinem Vertrag."
+    history: "Auszahlungsverlauf"
+    date: "Datum"
+    amount: "Betrag"
+    status: "Status"
+    none: "Noch keine Auszahlungen."
+    back: "Zurück zu den Servern"
+    statuses:
+      pending: "Wartet auf Zahlung"
+      paid: "Bezahlt"
+      failed: "Fehlgeschlagen"
+    blockers:
+      no_contract: "Eine Auszahlung ist nach der Genehmigung deines Vertrags möglich."
+      no_terms: "Im genehmigten Vertrag fehlt die Zustimmung zu den Partnerbedingungen. Bitte stelle eine neue Vertragsanfrage."
+      below_minimum: "Auszahlungen gibt es ab %{minimum}. Ein kleineres Guthaben wird übernommen."
+      claims_changed: "Das Guthaben hat sich gerade geändert, bitte versuche es erneut."
+      not_approved: "Auszahlungen gibt es nur für genehmigte Server."

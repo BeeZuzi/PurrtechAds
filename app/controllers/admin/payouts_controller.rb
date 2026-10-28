@@ -11,7 +11,7 @@ class Admin::PayoutsController < Admin::BaseController
 
   def index
     @servers = Server.approved.order(:name)
-    @payouts = Payout.includes(:server).order(created_at: :desc)
+    @payouts = Payout.includes(:server, :requested_by).order(created_at: :desc)
   end
 
   def show; end

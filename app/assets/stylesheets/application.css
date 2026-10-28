@@ -581,3 +581,14 @@ footer p { margin-inline: auto; }
 .field-check a { text-decoration: underline; text-underline-offset: 3px; }
 .field-hint { color: var(--color-text-muted); font-size: var(--text-xs); margin-top: var(--space-2); }
 .legal-version { color: var(--color-text-muted); font-size: var(--text-xs); margin-top: var(--space-8); }
+
+/* Server payouts */
+.payout-summary { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); max-width: var(--content-narrow); margin: 0 auto var(--space-6); }
+.payout-summary .stat { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-5); }
+.payout-summary .stat-value { font-size: var(--text-xl); }
+.payout-action { max-width: var(--content-narrow); margin: 0 auto var(--space-12); text-align: center; }
+.payout-action .field-hint { margin-inline: auto; }
+.payout-history { max-width: var(--content-narrow); margin: 0 auto var(--space-12); }
+.payout-heading { margin-bottom: var(--space-4); font-size: var(--text-lg); }
+.payout-history .admin-table { width: 100%; }
+.payout-history .lede { color: var(--color-text-muted); }

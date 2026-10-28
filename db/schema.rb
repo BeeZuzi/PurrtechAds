@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_28_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_28_120000) do
   create_table "claims", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "expires_at", null: false
@@ -81,10 +81,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_110000) do
     t.text "notes"
     t.datetime "paid_at"
     t.text "recipient_snapshot"
+    t.integer "requested_by_id"
     t.integer "server_id", null: false
     t.string "status", default: "pending", null: false
     t.datetime "updated_at", null: false
     t.index ["contract_request_id"], name: "index_payouts_on_contract_request_id"
+    t.index ["requested_by_id"], name: "index_payouts_on_requested_by_id"
     t.index ["server_id"], name: "index_payouts_on_server_id"
     t.index ["status"], name: "index_payouts_on_status"
   end
@@ -130,5 +132,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_110000) do
   add_foreign_key "fraud_flags", "users"
   add_foreign_key "payouts", "contract_requests"
   add_foreign_key "payouts", "servers"
+  add_foreign_key "payouts", "users", column: "requested_by_id"
   add_foreign_key "servers", "users"
 end

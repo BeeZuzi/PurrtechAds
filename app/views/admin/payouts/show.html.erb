@@ -5,6 +5,7 @@
     <p><strong>Server:</strong> <%= @payout.server.name %></p>
     <p><strong>Amount:</strong> <%= Payout.format_cents(@payout.amount_cents, @payout.currency) %></p>
     <p><strong>Status:</strong> <span class="status-badge status-<%= @payout.status %>"><%= @payout.status %></span></p>
+    <p><strong>Requested by:</strong> <%= @payout.requested_by ? "#{@payout.requested_by.minecraft_nick} (#{@payout.requested_by.email})" : "admin" %></p>
     <p><strong>Claims covered:</strong> <%= @payout.claims.count %></p>
     <p><strong>Created:</strong> <%= @payout.created_at.strftime("%d.%m.%Y %H:%M") %></p>
     <% if @payout.paid_at %>

@@ -1,6 +1,7 @@
 class Payout < ApplicationRecord
   belongs_to :server
   belongs_to :contract_request, optional: true
+  belongs_to :requested_by, class_name: "User", optional: true
   has_many :claims, dependent: :nullify
 
   STATUSES = %w[pending paid failed].freeze
@@ -23,7 +24,8 @@ class Payout < ApplicationRecord
   # Pays out everything the server has earned past the hold period: locks those
   # claims to the new payout, so the same earnings can never be paid twice, and
   # keeps a copy of the recipient's details as they were at payment time.
-  def self.issue!(server)
+  # `requested_by` is the owner who asked for it; nil when an admin issues it.
+  def self.issue!(server, requested_by: nil)
     transaction do
       contract = server.payout_contract
       claims = server.payable_claims.to_a
@@ -35,6 +37,7 @@ class Payout < ApplicationRecord
         amount_cents: cents,
         currency: PayoutPolicy.currency,
         contract_request: contract,
+        requested_by: requested_by,
         recipient_snapshot: contract.payout_snapshot
       )
       linked = Claim.where(id: claims.map(&:id), payout_id: nil).update_all(payout_id: payout.id)
