@@ -8,13 +8,18 @@ Rails.application.routes.draw do
 
   root "home#index"
 
+  get "terms", to: "pages#terms"
+  get "privacy", to: "pages#privacy"
+  get "partner-terms", to: "pages#partner_terms", as: :partner_terms
+  get "contact", to: "pages#contact"
+
   # Auth — sign in / log in card na landing page
-  resource :session, only: [:new, :create, :destroy]
+  resource :session, only: [ :new, :create, :destroy ]
 
   # Profil (ikonka vlevo nahoře v topbaru)
-  resource :profile, only: [:show, :edit, :update], controller: "profiles"
+  resource :profile, only: [ :show, :edit, :update ], controller: "profiles"
 
-  resources :users, only: [:new, :create], path: "signup"
+  resources :users, only: [ :new, :create ], path: "signup"
 
   get "password-reset", to: "password_resets#new", as: :new_password_reset
   post "password-reset", to: "password_resets#create", as: :password_reset
@@ -27,19 +32,26 @@ Rails.application.routes.draw do
   get "dashboard", to: "dashboard#show", as: :dashboard
   get "watch-ad", to: "ads#watch", as: :watch_ad
   post "watch-ad", to: "ads#claim", as: :claim_ad
+  get "watch-ad/offers", to: "ads#offers", as: :ad_offers
   get "banned", to: "sessions#banned", as: :banned
+
+  # --- Rewarded ad network postbacks ---
+  namespace :postbacks do
+    get "adgate", to: "ad_gate#create"
+  end
 
   # Volba jazyka — jednoduchý GET endpoint pro přepnutí locale
   get "locale/:locale", to: "locale#update", as: :set_locale
 
-  resources :servers, only: [:index, :new, :create, :show, :edit, :update] do
-    resource :contract_request, only: [:new, :create], controller: "contract_requests"
+  resources :servers, only: [ :index, :new, :create, :show, :edit, :update ] do
+    resource :contract_request, only: [ :new, :create ], controller: "contract_requests"
+    resources :payouts, only: [ :index, :create ], controller: "server_payouts"
   end
 
   # --- API pro plugin komunikaci a server dashboard ---
   namespace :api do
     namespace :plugin do
-      resources :servers, only: [:show] do
+      resources :servers, only: [ :show ] do
         get "config", on: :member, action: :plugin_config
       end
       get "players/:uuid/claims", to: "claims#index", as: :player_claims
@@ -52,14 +64,17 @@ Rails.application.routes.draw do
   namespace :admin do
     root "dashboard#index"
 
-    resources :servers, only: [:index, :show, :update]
-    resources :contract_requests, only: [:index, :show, :update]
-    resources :fraud_flags, only: [:index, :show, :update]
-    resources :payouts, only: [:index, :show, :create] do
-      member { patch :mark_paid }
+    resources :servers, only: [ :index, :show, :update ]
+    resources :contract_requests, only: [ :index, :show, :update ]
+    resources :fraud_flags, only: [ :index, :show, :update ]
+    resources :payouts, only: [ :index, :show, :create ] do
+      member do
+        patch :mark_paid
+        patch :mark_failed
+      end
     end
 
-    resources :users, only: [:index, :show, :edit, :update] do
+    resources :users, only: [ :index, :show, :edit, :update ] do
       member do
         patch :ban
         patch :unban

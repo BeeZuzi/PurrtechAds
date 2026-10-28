@@ -51,7 +51,11 @@
       <div class="step-body">
         <h3>Download the Ads plugin</h3>
         <p>Download the plugin JAR file and drop it into your server's <code>/plugins</code> folder.</p>
-        <a href="#" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Download plugin (coming soon)</a>
+        <% if plugin_download_url %>
+          <%= link_to "Download plugin", plugin_download_url, class: "btn btn-primary", rel: "noopener noreferrer", download: true %>
+        <% else %>
+          <span class="btn btn-ghost" aria-disabled="true">Download plugin (coming soon)</span>
+        <% end %>
       </div>
     </div>
 

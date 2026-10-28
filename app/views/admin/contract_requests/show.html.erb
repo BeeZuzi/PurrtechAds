@@ -18,6 +18,14 @@
     <p><strong>Preferred currency:</strong> <%= @contract_request.preferred_currency %></p>
     <p><strong>Payout method:</strong> <%= @contract_request.payout_method.humanize %></p>
 
+    <h2>Partner terms</h2>
+    <% if @contract_request.partner_terms_accepted? %>
+      <p><strong>Accepted:</strong> version <%= @contract_request.terms_version %>,
+        <%= @contract_request.terms_accepted_at.strftime("%d.%m.%Y %H:%M") %>, IP <%= @contract_request.terms_accepted_ip %></p>
+    <% else %>
+      <p><strong>Accepted:</strong> no — payouts are blocked until the owner submits a new request.</p>
+    <% end %>
+
     <% if @contract_request.message.present? %>
       <h2>Message</h2>
       <p><%= simple_format(@contract_request.message) %></p>

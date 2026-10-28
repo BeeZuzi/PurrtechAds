@@ -1,0 +1,34 @@
+<% content_for :title, "#{t("pages.#{page}.title")} — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= render "shared/locale_switcher" %>
+  </div>
+  <div class="topbar-right"></div>
+</header>
+
+<% policy = {
+     reward: Payout.format_cents(PayoutPolicy.reward_cents, PayoutPolicy.currency),
+     hold: PayoutPolicy.hold_days,
+     minimum: Payout.format_cents(PayoutPolicy.minimum_cents, PayoutPolicy.currency),
+     currency: PayoutPolicy.currency,
+     version: ContractRequest::PARTNER_TERMS_VERSION
+   } %>
+
+<main class="section legal">
+  <%= link_to t("pages.back_home"), root_path, class: "legal-back" %>
+  <h1 class="section-title"><%= t("pages.#{page}.title") %></h1>
+
+  <% t("pages.#{page}.sections").each do |section| %>
+    <section class="legal-section">
+      <h2><%= section[:heading] %></h2>
+      <p><%= section[:body] % policy %></p>
+    </section>
+  <% end %>
+
+  <% if page == "partner_terms" %>
+    <p class="legal-version"><%= t("pages.partner_terms.version", version: policy[:version]) %></p>
+  <% end %>
+</main>
+
+<%= render "shared/footer" %>

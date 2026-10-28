@@ -1,0 +1,89 @@
+<% content_for :title, "#{t("server_payouts.title")} — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= render "shared/nav_icons" %>
+    <%= render "shared/locale_switcher" %>
+  </div>
+</header>
+
+<main class="setup-main">
+  <section class="setup-hero">
+    <h1><%= t("server_payouts.heading", server: @server.name) %></h1>
+    <p class="lede"><%= t("server_payouts.lede", reward: Payout.format_cents(PayoutPolicy.reward_cents, PayoutPolicy.currency), hold: PayoutPolicy.hold_days) %></p>
+  </section>
+
+  <div class="payout-summary payout-views">
+    <div class="stat">
+      <span class="stat-value"><%= @server.confirmed_views_count %></span>
+      <span class="stat-label"><%= t("server_payouts.views_total") %></span>
+    </div>
+    <div class="stat">
+      <span class="stat-value"><%= @server.views_since_last_payout %></span>
+      <span class="stat-label">
+        <% if @last_payout %>
+          <%= t("server_payouts.views_since", date: l(@last_payout.created_at.to_date, format: "%d.%m.%Y")) %>
+        <% else %>
+          <%= t("server_payouts.views_since_none") %>
+        <% end %>
+      </span>
+    </div>
+  </div>
+
+  <div class="payout-summary">
+    <div class="stat">
+      <span class="stat-value"><%= Payout.format_cents(@server.balance_cents, PayoutPolicy.currency) %></span>
+      <span class="stat-label"><%= t("server_payouts.ready") %></span>
+    </div>
+    <div class="stat">
+      <span class="stat-value"><%= Payout.format_cents(@server.held_cents, PayoutPolicy.currency) %></span>
+      <span class="stat-label"><%= t("server_payouts.held", days: PayoutPolicy.hold_days) %></span>
+    </div>
+  </div>
+
+  <div class="payout-action">
+    <% if @blocker.nil? %>
+      <%= button_to t("server_payouts.request"), server_payouts_path(@server), method: :post, class: "btn btn-primary" %>
+      <p class="field-hint"><%= t("server_payouts.request_hint") %></p>
+    <% else %>
+      <p class="field-hint">
+        <%= t("server_payouts.blockers.#{@blocker}", minimum: Payout.format_cents(PayoutPolicy.minimum_cents, PayoutPolicy.currency)) %>
+        <% if %i[no_contract no_terms].include?(@blocker) %>
+          <%= link_to t("server_payouts.request_contract"), new_server_contract_request_path(@server) %>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="payout-history">
+  <h2 class="payout-heading"><%= t("server_payouts.history") %></h2>
+  <% if @payouts.any? %>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th><%= t("server_payouts.date") %></th>
+          <th><%= t("server_payouts.amount") %></th>
+          <th><%= t("server_payouts.status") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payouts.each do |payout| %>
+          <tr>
+            <td><%= payout.created_at.strftime("%d.%m.%Y") %></td>
+            <td><%= Payout.format_cents(payout.amount_cents, payout.currency) %></td>
+            <td><span class="status-badge status-<%= payout.status %>"><%= t("server_payouts.statuses.#{payout.status}") %></span></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="lede"><%= t("server_payouts.none") %></p>
+  <% end %>
+  </div>
+
+  <div class="setup-cta">
+    <%= link_to t("server_payouts.back"), servers_path, class: "btn btn-ghost" %>
+  </div>
+</main>
+
+<%= render "shared/settings_panel" %>

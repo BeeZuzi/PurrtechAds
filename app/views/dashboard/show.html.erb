@@ -1,4 +1,4 @@
-<% content_for :title, "Dashboard — Ads" %>
+<% content_for :title, "#{t("common.dashboard_title")} — Ads" %>
 
 <header class="topbar">
   <div class="topbar-left">
@@ -6,7 +6,7 @@
     <%= render "shared/locale_switcher" %>
   </div>
   <div class="topbar-right">
-    <%= button_to "Log out", session_path, method: :delete, class: "btn btn-ghost", form: { class: "logout-form" } %>
+    <%= button_to t("common.log_out"), session_path, method: :delete, class: "btn btn-ghost", form: { class: "logout-form" } %>
   </div>
 </header>
 

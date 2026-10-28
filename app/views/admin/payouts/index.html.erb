@@ -1,23 +1,46 @@
 <div class="admin-main">
   <h1>Payouts</h1>
 
+  <p class="lede">
+    Servers get <%= Payout.format_cents(PayoutPolicy.reward_cents, PayoutPolicy.currency) %> per confirmed ad view. Earnings count after
+    <%= PayoutPolicy.hold_days %> days and are paid from <%= Payout.format_cents(PayoutPolicy.minimum_cents, PayoutPolicy.currency) %>.
+  </p>
+
   <h2>Server balances</h2>
   <table class="admin-table">
     <thead>
       <tr>
         <th>Server</th>
-        <th>Balance</th>
+        <th>Ready to pay</th>
+        <th>On hold</th>
+        <th>Our margin</th>
+        <th>Contract</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <% @servers.each do |server| %>
+        <% contract = server.payout_contract %>
+        <% blocker = server.payout_blocker(contract: contract) %>
         <tr>
           <td><%= server.name %></td>
-          <td><%= Payout.format_cents(server.balance_cents) %></td>
+          <td><%= Payout.format_cents(server.balance_cents, PayoutPolicy.currency) %></td>
+          <td><%= Payout.format_cents(server.held_cents, PayoutPolicy.currency) %></td>
+          <td><%= Payout.format_cents(server.unpaid_revenue_cents - server.balance_cents - server.held_cents, PayoutPolicy.currency) %></td>
           <td>
-            <% if server.balance_cents > 0 %>
+            <% if contract.nil? %>
+              <span class="status-badge status-rejected">none</span>
+            <% elsif !contract.partner_terms_accepted? %>
+              <span class="status-badge status-rejected">terms missing</span>
+            <% else %>
+              <%= link_to contract.legal_name, admin_contract_request_path(contract) %>
+            <% end %>
+          </td>
+          <td>
+            <% if blocker.nil? %>
               <%= button_to "Issue payout", admin_payouts_path(server_id: server.id), method: :post, class: "btn btn-primary btn-sm" %>
+            <% elsif blocker == :below_minimum && server.balance_cents > 0 %>
+              <span class="lede">Below minimum</span>
             <% end %>
           </td>
         </tr>
@@ -32,6 +55,7 @@
         <th>Server</th>
         <th>Amount</th>
         <th>Status</th>
+        <th>Requested by</th>
         <th>Created</th>
         <th></th>
       </tr>
@@ -42,6 +66,7 @@
           <td><%= payout.server.name %></td>
           <td><%= Payout.format_cents(payout.amount_cents, payout.currency) %></td>
           <td><span class="status-badge status-<%= payout.status %>"><%= payout.status %></span></td>
+          <td><%= payout.requested_by&.minecraft_nick || "admin" %></td>
           <td><%= payout.created_at.strftime("%d.%m.%Y") %></td>
           <td><%= link_to "View", admin_payout_path(payout), class: "btn btn-ghost" %></td>
         </tr>

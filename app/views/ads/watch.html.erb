@@ -23,6 +23,15 @@
         </div>
         <%= submit_tag t("ads.watch.continue"), class: "btn btn-primary" %>
       <% end %>
+    <% elsif adgate_configured? %>
+      <p class="lede"><%= t("ads.watch.claim_for_html", server: @server.name) %></p>
+      <p class="lede"><%= t("ads.watch.offers_lede") %></p>
+
+      <%= link_to t("ads.watch.continue_to_offers"), ad_offers_path(server_id: @server.id), class: "btn btn-primary" %>
+      <%= link_to t("ads.watch.pick_different_server"), watch_ad_path, class: "btn btn-ghost" %>
+    <% elsif !simulated_claims_allowed? %>
+      <p class="lede"><%= t("ads.watch.unavailable") %></p>
+      <%= link_to t("ads.watch.back_to_dashboard"), dashboard_path, class: "btn btn-ghost" %>
     <% else %>
       <p class="lede"><%= t("ads.watch.claim_for_html", server: @server.name) %></p>
 

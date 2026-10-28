@@ -1,0 +1,76 @@
+de:
+  meta:
+    description: "Ads verbindet Spieler und Minecraft-Server durch freiwillige Belohnungswerbung. Die Belohnung im Spiel legt der Server selbst fest."
+    tagline: "Ansehen. Verdienen. Spielen."
+
+  common:
+    log_out: "Abmelden"
+    dashboard_title: "Übersicht"
+
+  auth:
+    sign_in_required: "Du musst dich zuerst anmelden."
+
+  footer:
+    terms: "Nutzungsbedingungen"
+    privacy: "Datenschutz"
+    contact: "Kontakt"
+    nav_label: "Fußzeile"
+
+  home:
+    trust:
+      title: "Was hier passiert und was nicht"
+      free_title: "Kostenlos"
+      free_body: "Registrierung und Nutzung kosten nichts."
+      voluntary_title: "Freiwillig"
+      voluntary_body: "Du siehst Werbung nur, wenn du es willst."
+      server_title: "Der Server legt die Belohnung fest"
+      server_body: "Was du im Spiel bekommst, bestimmt der Serverbetreiber, nicht wir."
+      password_title: "Passwort sicher"
+      password_body: "Wir speichern nur einen nicht umkehrbaren Hash deines Passworts, nie das Passwort selbst."
+    faq:
+      title: "Häufige Fragen"
+      q1: "Wie viel bringt mir eine Werbung?"
+      a1: "Wir versprechen keine Höhe der Belohnung. Der Serverbetreiber legt sie über sein Plugin fest, und sie entsteht erst nach bestätigter Ansicht."
+      q2: "Muss ich Werbung ansehen?"
+      a2: "Nein. Es ist immer freiwillig. Ohne deinen Klick startet nichts."
+      q3: "Wie kommt die Belohnung ins Spiel?"
+      a3: "Nach der bestätigten Ansicht entsteht ein kurz gültiger Anspruch. Das Plugin des Servers prüft ihn und vergibt die Belohnung im Spiel."
+      q4: "Ich betreibe einen Server. Wie fange ich an?"
+      a4: "Registriere dich, wähle in der Übersicht deinen eigenen Server und sende eine Anfrage. Nach der Freigabe installierst du das Plugin und legst die Belohnung fest."
+      q5: "Was, wenn meine Belohnung nicht ankommt?"
+      a5: "Schreib uns über die Kontaktseite. Wir suchen den Anspruch heraus und finden, wo er hängen geblieben ist."
+
+  pages:
+    updated: "Zuletzt geändert: %{date}"
+    back_home: "Zurück zur Startseite"
+    draft_note: "Dieser Text ist ein Arbeitsentwurf. Lass ihn vor dem Livegang prüfen."
+    terms:
+      title: "Nutzungsbedingungen"
+      sections:
+        - heading: "Was der Dienst ist"
+          body: "Ads verbindet Minecraft-Spieler und Server durch freiwillige Belohnungswerbung. Die Belohnung im Spiel vergibt der Server, nicht wir."
+        - heading: "Dein Konto"
+          body: "Du musst eine echte E-Mail-Adresse und deinen eigenen Minecraft-Namen angeben. Für Konto und Passwort bist du selbst verantwortlich."
+        - heading: "Belohnungen"
+          body: "Wir garantieren weder Höhe noch Vergabe einer Belohnung. Das hängt von der Bestätigung durch den Partner und vom Plugin des Servers ab."
+        - heading: "Verbotenes Verhalten"
+          body: "Bots, mehrere Konten, VPN zur Umgehung von Regeln oder anderes Betrügen sind verboten. Verdächtige Konten können wir einschränken oder sperren."
+        - heading: "Änderungen"
+          body: "Wir können diese Bedingungen ändern. Über wesentliche Änderungen informieren wir dich."
+    privacy:
+      title: "Datenschutz"
+      sections:
+        - heading: "Was wir speichern"
+          body: "E-Mail, Minecraft-Name, einen Hash deines Passworts und bei Werbeansichten auch IP-Adresse und Zeitpunkt. Die IP-Adresse nutzen wir zur Missbrauchserkennung."
+        - heading: "Wofür wir sie nutzen"
+          body: "Für den Betrieb deines Kontos, die E-Mail-Bestätigung, das Zurücksetzen des Passworts, die Vergabe von Belohnungen und den Schutz vor Betrug."
+        - heading: "Wer sie erhält"
+          body: "Der Werbepartner erhält die technischen Daten, die zur Anzeige eines Angebots nötig sind. Wir verkaufen keine Daten."
+        - heading: "Cookies"
+          body: "Wir verwenden nur notwendige Cookies für die Anmeldung und zum Merken von Sprache und Darstellung. Wir tracken dich nicht für Werbung."
+        - heading: "Deine Rechte"
+          body: "Du kannst Auskunft, Berichtigung oder Löschung deiner Daten verlangen. Schreib uns über die Kontaktseite."
+    contact:
+      title: "Kontakt"
+      body: "Schreib uns bei Fragen, Problemen mit einer Belohnung oder dem Wunsch, deine Daten zu löschen."
+      email_label: "E-Mail"

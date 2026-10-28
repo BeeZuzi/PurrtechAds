@@ -22,6 +22,9 @@
           </div>
           <div class="server-item-actions">
             <span class="status-badge status-<%= server.status %>"><%= server.status.humanize %></span>
+            <% if server.approved? %>
+              <%= link_to t("server_payouts.title"), server_payouts_path(server), class: "btn btn-ghost btn-sm" %>
+            <% end %>
             <%= link_to "Request contract", new_server_contract_request_path(server), class: "btn btn-ghost btn-sm" %>
           </div>
         </div>

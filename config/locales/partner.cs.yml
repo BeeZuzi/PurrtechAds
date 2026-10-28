@@ -1,0 +1,29 @@
+cs:
+  errors:
+    messages:
+      accepted: "musí být odsouhlaseno"
+  activerecord:
+    attributes:
+      contract_request:
+        partner_terms: "Partnerské podmínky"
+  pages:
+    partner_terms:
+      title: "Partnerské podmínky"
+      agree_html: "Souhlasím s %{link} a potvrzuji, že uvedené údaje jsou pravdivé."
+      payout_summary: "Server dostává pevnou odměnu %{reward} za každé zhlédnutí reklamy. Odměna se započítá po %{hold} dnech a vyplácí se od %{minimum}."
+      version: "Verze podmínek: %{version}"
+      sections:
+        - heading: "Odměna za zhlédnutí"
+          body: "Server dostává pevnou odměnu %{reward} za každé zhlédnutí reklamy, které potvrdí reklamní partner. Výše odměny nezávisí na tom, kolik za zhlédnutí obdržíme my. Odměnu můžeme změnit; nová výše platí jen pro zhlédnutí po změně a o změně tě předem informujeme."
+        - heading: "Ochranná lhůta"
+          body: "Odměna se do zůstatku započítá po %{hold} dnech od zhlédnutí. Během této doby ji nezapočítáme, pokud reklamní partner zhlédnutí stornuje nebo je zhlédnutí označeno jako podezřelé."
+        - heading: "Výplata"
+          body: "Vyplácíme zůstatek od %{minimum} v měně %{currency}. Menší zůstatek se přenáší do další výplaty. Výplaty posíláme na údaje uvedené ve schválené smlouvě."
+        - heading: "Podvody a zneužití"
+          body: "Za podvodné zhlédnutí, boty nebo vícenásobné účty se odměna nevyplácí. Můžeme výplaty zadržet, vrátit zpět nebo server odpojit."
+        - heading: "Údaje, daně a doklady"
+          body: "Odpovídáš za správnost údajů ve smlouvě i za své daně. Na požádání doložíme výplaty a ty nám doložíš potřebné doklady."
+        - heading: "Pluginy a odměny ve hře"
+          body: "Za plugin a za to, co hráči na serveru dostávají, odpovídá majitel serveru."
+        - heading: "Ukončení a změny"
+          body: "Spolupráci může kterákoli strana ukončit. Už započítaný a ověřený zůstatek vyplatíme. Podmínky můžeme změnit, o nové verzi tě budeme informovat."

@@ -9,30 +9,57 @@
     <%= link_to "Suspendované", admin_servers_path(status: "suspended"), class: @status == "suspended" ? "active" : "" %>
   </div>
 
-  <table class="admin-table">
+  <p class="lede">
+    Odměna za zhlédnutí je <%= Payout.format_cents(PayoutPolicy.reward_cents, PayoutPolicy.currency) %>.
+    „K vyplacení“ je vše, co server vydělal a ještě nebylo v žádosti o výplatu. „Připraveno“ je z toho část, která už prošla ochrannou lhůtou
+    (<%= PayoutPolicy.hold_days %> dní) a kontrolou podvodů.
+  </p>
+
+  <div class="table-scroll">
+  <table class="admin-table admin-table-compact">
     <thead>
       <tr>
         <th>Název</th>
         <th>Vlastník</th>
         <th>Status</th>
-        <th>Vytvořeno</th>
-        <th></th>
+        <th>Zhlédnuté reklamy</th>
+        <th>K vyplacení</th>
+        <th>Z toho připraveno</th>
+        <th>V žádosti</th>
+        <th>Vyplaceno</th>
       </tr>
     </thead>
     <tbody>
-      <% @servers.each do |server| %>
-        <tr>
-          <td><%= server.name %></td>
+      <% currency = PayoutPolicy.currency %>
+      <% rows = @servers.map { |server| { server: server, views: server.confirmed_views_count, redeemed: server.redeemed_views_count, owed: server.owed_cents, ready: server.balance_cents, pending: server.pending_payout_cents, paid: server.paid_out_cents } } %>
+      <% rows.each do |row| %>
+        <% server = row[:server] %>
+        <tr class="row-link" data-controller="row-link" data-row-link-url-value="<%= admin_server_path(server) %>" data-action="click->row-link#open">
+          <td><%= link_to server.name, admin_server_path(server), class: "row-link-anchor" %></td>
           <td><%= server.user&.email %></td>
           <td>
             <span class="status-badge status-<%= server.status %>">
               <%= server.status %>
             </span>
           </td>
-          <td><%= server.created_at.strftime("%d.%m.%Y") %></td>
-          <td><%= link_to "Detail", admin_server_path(server) %></td>
+          <td><%= row[:views] %> <span class="lede">(vyzvednuto <%= row[:redeemed] %>)</span></td>
+          <td><strong><%= Payout.format_cents(row[:owed], currency) %></strong></td>
+          <td><%= Payout.format_cents(row[:ready], currency) %></td>
+          <td><%= Payout.format_cents(row[:pending], currency) %></td>
+          <td><%= Payout.format_cents(row[:paid], currency) %></td>
         </tr>
       <% end %>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3"><strong>Celkem</strong></td>
+        <td><strong><%= rows.sum { |r| r[:views] } %></strong> <span class="lede">(vyzvednuto <%= rows.sum { |r| r[:redeemed] } %>)</span></td>
+        <td><strong><%= Payout.format_cents(rows.sum { |r| r[:owed] }, currency) %></strong></td>
+        <td><strong><%= Payout.format_cents(rows.sum { |r| r[:ready] }, currency) %></strong></td>
+        <td><strong><%= Payout.format_cents(rows.sum { |r| r[:pending] }, currency) %></strong></td>
+        <td><strong><%= Payout.format_cents(rows.sum { |r| r[:paid] }, currency) %></strong></td>
+      </tr>
+    </tfoot>
   </table>
+  </div>
 </main>

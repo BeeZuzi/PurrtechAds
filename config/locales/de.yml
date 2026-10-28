@@ -67,6 +67,8 @@ de:
       choose_server: "Server auswählen"
       continue: "Weiter"
       claim_for_html: "Die Belohnung wird für <strong>%{server}</strong> beansprucht."
+      offers_lede: "Du wirst zur Angebotsseite unseres Partners weitergeleitet — schließe dort ein beliebiges Angebot ab, und deine Belohnung erscheint hier, sobald sie bestätigt ist."
+      continue_to_offers: "Weiter zu den Angeboten"
       claim_reward: "Belohnung einlösen"
       pick_different_server: "Anderen Server wählen"
       timer_remaining: "Noch %{seconds} s…"

@@ -1,0 +1,76 @@
+en:
+  meta:
+    description: "Ads connects players and Minecraft servers through opt-in rewarded advertising. Servers set the in-game reward themselves."
+    tagline: "Watch. Earn. Play."
+
+  common:
+    log_out: "Log out"
+    dashboard_title: "Dashboard"
+
+  auth:
+    sign_in_required: "You need to sign in first."
+
+  footer:
+    terms: "Terms"
+    privacy: "Privacy"
+    contact: "Contact"
+    nav_label: "Footer"
+
+  home:
+    trust:
+      title: "What happens here, and what doesn't"
+      free_title: "Free"
+      free_body: "Signing up and using Ads costs nothing."
+      voluntary_title: "Opt-in"
+      voluntary_body: "You only watch an ad when you choose to."
+      server_title: "Servers set the reward"
+      server_body: "What you get in-game is set by the server owner, not by us."
+      password_title: "Password stays safe"
+      password_body: "We store only an irreversible hash of your password, never the password itself."
+    faq:
+      title: "Frequently asked questions"
+      q1: "How much will an ad earn me?"
+      a1: "We don't promise a reward amount. The server owner sets the in-game reward through their plugin, and it only arises once the view is confirmed."
+      q2: "Do I have to watch ads?"
+      a2: "No. It's always optional. Nothing starts without your click."
+      q3: "How does the reward reach the game?"
+      a3: "Once the view is confirmed, a short-lived claim is created. The server's plugin verifies it and grants the reward in-game."
+      q4: "I own a server. How do I start?"
+      a4: "Sign up, choose your own server on the dashboard and send a request. Once approved, install the plugin and set your reward."
+      q5: "What if my reward doesn't arrive?"
+      a5: "Write to us via the Contact page. We'll look up the claim and find where it stopped."
+
+  pages:
+    updated: "Last updated: %{date}"
+    back_home: "Back to home"
+    draft_note: "This text is a working draft. Have it reviewed before going live."
+    terms:
+      title: "Terms of use"
+      sections:
+        - heading: "What the service is"
+          body: "Ads connects Minecraft players and servers through opt-in rewarded advertising. The in-game reward is granted by the server, not by us."
+        - heading: "Your account"
+          body: "You must provide a real e-mail address and your own Minecraft nick. You are responsible for your account and password."
+        - heading: "Rewards"
+          body: "We don't guarantee the amount or the granting of any reward. It depends on the partner confirming the view and on the server's plugin."
+        - heading: "Prohibited conduct"
+          body: "Bots, multiple accounts, using a VPN to get around rules, or any other cheating is forbidden. We may restrict or ban suspicious accounts."
+        - heading: "Changes"
+          body: "We may update these terms. We'll let you know about significant changes."
+    privacy:
+      title: "Privacy policy"
+      sections:
+        - heading: "What we store"
+          body: "Your e-mail, Minecraft nick, a hash of your password and, for ad views, your IP address and the time. We use the IP address to detect abuse."
+        - heading: "Why we use it"
+          body: "To run your account, confirm your e-mail, reset your password, grant rewards and protect against fraud."
+        - heading: "Who gets it"
+          body: "The advertising partner receives the technical data needed to show an offer. We don't sell your data."
+        - heading: "Cookies"
+          body: "We only use essential cookies for sign-in and for remembering your language and appearance. We don't track you for advertising."
+        - heading: "Your rights"
+          body: "You can ask to access, correct or delete your data. Write to us via the Contact page."
+    contact:
+      title: "Contact"
+      body: "Write to us with a question, a problem with a reward or a request to delete your data."
+      email_label: "E-mail"

@@ -1,0 +1,29 @@
+en:
+  errors:
+    messages:
+      accepted: "must be accepted"
+  activerecord:
+    attributes:
+      contract_request:
+        partner_terms: "Partner terms"
+  pages:
+    partner_terms:
+      title: "Partner terms"
+      agree_html: "I agree to the %{link} and confirm that the details I gave are true."
+      payout_summary: "Your server receives a fixed %{reward} for every ad view. Earnings count after %{hold} days and are paid out from %{minimum}."
+      version: "Terms version: %{version}"
+      sections:
+        - heading: "Reward per view"
+          body: "The server receives a fixed %{reward} for every ad view the ad partner confirms. The amount does not depend on what we receive for the view. We may change the reward; the new amount only applies to views after the change, and we'll tell you in advance."
+        - heading: "Hold period"
+          body: "The reward counts toward your balance %{hold} days after the view. We won't count it if the ad partner reverses the view or it is flagged as suspicious during that time."
+        - heading: "Payouts"
+          body: "We pay out balances of %{minimum} or more in %{currency}. A smaller balance rolls over to the next payout. Payouts go to the details in your approved contract."
+        - heading: "Fraud and abuse"
+          body: "No reward is paid for fraudulent views, bots or multiple accounts. We may hold or reverse payouts, or disconnect the server."
+        - heading: "Details, taxes and documents"
+          body: "You are responsible for the accuracy of your contract details and for your own taxes. On request we'll document payouts, and you'll provide the documents we need."
+        - heading: "Plugins and in-game rewards"
+          body: "The server owner is responsible for the plugin and for what players receive on the server."
+        - heading: "Ending and changes"
+          body: "Either side may end the cooperation. We'll pay out any balance that is already counted and verified. We may change these terms and will tell you about a new version."

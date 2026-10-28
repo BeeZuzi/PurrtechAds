@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless logged_in?
-      redirect_to root_path, alert: "You need to sign in first"
+      redirect_to root_path, alert: t("auth.sign_in_required")
     end
   end
 
@@ -38,5 +38,4 @@ class ApplicationController < ActionController::Base
       redirect_to new_session_path, alert: "Tvůj účet byl zablokován."
     end
   end
-  
 end

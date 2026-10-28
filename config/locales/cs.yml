@@ -67,6 +67,8 @@ cs:
       choose_server: "Vyber server"
       continue: "Pokračovat"
       claim_for_html: "Odměna bude přiznána serveru <strong>%{server}</strong>."
+      offers_lede: "Přesměrujeme tě na nabídkovou stránku našeho partnera — splň tam libovolnou nabídku a odměna se tu objeví, jakmile ji potvrdí."
+      continue_to_offers: "Pokračovat na nabídky"
       claim_reward: "Získat odměnu"
       pick_different_server: "Vybrat jiný server"
       timer_remaining: "Zbývá %{seconds} s…"

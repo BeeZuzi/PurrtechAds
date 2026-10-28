@@ -5,14 +5,23 @@
     <p><strong>Server:</strong> <%= @payout.server.name %></p>
     <p><strong>Amount:</strong> <%= Payout.format_cents(@payout.amount_cents, @payout.currency) %></p>
     <p><strong>Status:</strong> <span class="status-badge status-<%= @payout.status %>"><%= @payout.status %></span></p>
+    <p><strong>Requested by:</strong> <%= @payout.requested_by ? "#{@payout.requested_by.minecraft_nick} (#{@payout.requested_by.email})" : "admin" %></p>
+    <p><strong>Claims covered:</strong> <%= @payout.claims.count %></p>
     <p><strong>Created:</strong> <%= @payout.created_at.strftime("%d.%m.%Y %H:%M") %></p>
     <% if @payout.paid_at %>
       <p><strong>Paid at:</strong> <%= @payout.paid_at.strftime("%d.%m.%Y %H:%M") %></p>
+    <% end %>
+
+    <% if @payout.recipient_snapshot.present? %>
+      <h2>Send the money to</h2>
+      <%= simple_format(h(@payout.recipient_snapshot)) %>
     <% end %>
   </div>
 
   <% if @payout.pending? %>
     <%= button_to "Mark as paid", mark_paid_admin_payout_path(@payout), method: :patch, class: "btn btn-primary" %>
+    <%= button_to "Mark as failed", mark_failed_admin_payout_path(@payout), method: :patch, class: "btn btn-ghost",
+                  form: { data: { turbo_confirm: "Mark this payout as failed? Its earnings go back to the server's balance." } } %>
   <% end %>
 
   <%= link_to "← Back to list", admin_payouts_path, class: "btn btn-ghost" %>

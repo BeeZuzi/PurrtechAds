@@ -67,6 +67,8 @@ en:
       choose_server: "Choose a server"
       continue: "Continue"
       claim_for_html: "Reward will be claimed for <strong>%{server}</strong>."
+      offers_lede: "You'll be taken to our partner's offer wall — complete any offer there and your reward shows up here once it's confirmed."
+      continue_to_offers: "Continue to offers"
       claim_reward: "Claim reward"
       pick_different_server: "Pick a different server"
       timer_remaining: "%{seconds}s remaining…"

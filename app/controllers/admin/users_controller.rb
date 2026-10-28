@@ -1,7 +1,7 @@
 # app/controllers/admin/users_controller.rb
 class Admin::UsersController < Admin::BaseController
   before_action :require_user_management!
-  before_action :set_user, only: [:show, :edit, :update, :ban, :unban]
+  before_action :set_user, only: [ :show, :edit, :update, :ban, :unban ]
 
   def index
     @users = User.order(:created_at)
@@ -9,13 +9,16 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def show; end
-  def edit; end
+  # Roles are edited on the user's detail page; there is no separate edit view.
+  def edit
+    redirect_to admin_user_path(@user)
+  end
 
   def update
     if @user.update(user_params)
       redirect_to admin_user_path(@user), notice: "Uživatel byl upraven"
     else
-      render :edit, status: :unprocessable_entity
+      redirect_to admin_user_path(@user), alert: "Roli se nepodařilo změnit."
     end
   end
 
@@ -42,9 +45,8 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    allowed_roles = current_user.superadmin? ? User::ROLES : User::ROLES - ["superadmin"]
-    permitted = params.require(:user).permit(:role)
-    permitted[:role] = nil unless allowed_roles.include?(permitted[:role])
-    permitted
+    allowed_roles = current_user.superadmin? ? User::ROLES : User::ROLES - [ "superadmin" ]
+    role = params.dig(:user, :role)
+    { role: (role if allowed_roles.include?(role)) }
   end
 end
