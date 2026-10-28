@@ -575,3 +575,9 @@ footer p { margin-inline: auto; }
   width: auto;
   min-width: 180px;
 }
+/* Checkbox field with a hint (contract form) */
+.field-check label { display: flex; gap: var(--space-3); align-items: flex-start; font-size: var(--text-sm); font-weight: 400; color: var(--color-text); }
+.field-check input[type="checkbox"] { width: auto; min-height: 0; margin-top: 4px; flex-shrink: 0; }
+.field-check a { text-decoration: underline; text-underline-offset: 3px; }
+.field-hint { color: var(--color-text-muted); font-size: var(--text-xs); margin-top: var(--space-2); }
+.legal-version { color: var(--color-text-muted); font-size: var(--text-xs); margin-top: var(--space-8); }

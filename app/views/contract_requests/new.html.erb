@@ -86,7 +86,7 @@
           <div class="field">
             <%= f.label :preferred_currency, "Preferred currency" %>
             <%= f.select :preferred_currency,
-                options_for_select([["USD", "USD"], ["EUR", "EUR"], ["GBP", "GBP"], ["CZK", "CZK"], ["PLN", "PLN"], ["CAD", "CAD"], ["AUD", "AUD"], ["JPY", "JPY"]], "USD"),
+                options_for_select([["EUR", "EUR"], ["USD", "USD"], ["GBP", "GBP"], ["CZK", "CZK"], ["PLN", "PLN"], ["CAD", "CAD"], ["AUD", "AUD"], ["JPY", "JPY"]], "EUR"),
                 {}, required: true %>
           </div>
           <div class="field">
@@ -94,6 +94,13 @@
             <%= f.select :payout_method,
                 options_for_select([["Bank transfer", "bank_transfer"], ["PayPal", "paypal"], ["Stripe", "stripe"], ["Crypto", "crypto"]]),
                 { prompt: "Select payout method" }, required: true %>
+          </div>
+          <div class="field field-check">
+            <label>
+              <%= f.check_box :partner_terms, required: true %>
+              <span><%= t("pages.partner_terms.agree_html", link: link_to(t("pages.partner_terms.title"), partner_terms_path, target: "_blank", rel: "noopener")) %></span>
+            </label>
+            <p class="field-hint"><%= t("pages.partner_terms.payout_summary", reward: Payout.format_cents(PayoutPolicy.reward_cents, PayoutPolicy.currency), hold: PayoutPolicy.hold_days, minimum: Payout.format_cents(PayoutPolicy.minimum_cents, PayoutPolicy.currency)) %></p>
           </div>
         </div>
 

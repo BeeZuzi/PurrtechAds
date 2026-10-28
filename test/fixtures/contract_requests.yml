@@ -11,3 +11,18 @@ pending_request:
   preferred_currency: USD
   payout_method: bank_transfer
   status: pending
+
+approved_request:
+  user: owner
+  server: approved_server
+  entity_type: sole_trader
+  legal_name: Jane Doe s.r.o.
+  country_code: CZ
+  contact_email: jane@example.com
+  registered_address: Wenceslas Square 1, Prague
+  preferred_currency: EUR
+  payout_method: bank_transfer
+  status: approved
+  terms_accepted_at: <%= 40.days.ago.to_fs(:db) %>
+  terms_version: "2026-10-28"
+  terms_accepted_ip: 127.0.0.1

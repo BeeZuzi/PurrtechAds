@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get "terms", to: "pages#terms"
   get "privacy", to: "pages#privacy"
+  get "partner-terms", to: "pages#partner_terms", as: :partner_terms
   get "contact", to: "pages#contact"
 
   # Auth — sign in / log in card na landing page
@@ -60,7 +61,10 @@ Rails.application.routes.draw do
     resources :contract_requests, only: [:index, :show, :update]
     resources :fraud_flags, only: [:index, :show, :update]
     resources :payouts, only: [:index, :show, :create] do
-      member { patch :mark_paid }
+      member do
+        patch :mark_paid
+        patch :mark_failed
+      end
     end
 
     resources :users, only: [:index, :show, :edit, :update] do

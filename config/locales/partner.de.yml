@@ -1,0 +1,29 @@
+de:
+  errors:
+    messages:
+      accepted: "muss akzeptiert werden"
+  activerecord:
+    attributes:
+      contract_request:
+        partner_terms: "Partnerbedingungen"
+  pages:
+    partner_terms:
+      title: "Partnerbedingungen"
+      agree_html: "Ich stimme den %{link} zu und bestätige, dass meine Angaben stimmen."
+      payout_summary: "Dein Server erhält pro Werbeansicht feste %{reward}. Die Belohnung zählt nach %{hold} Tagen und werden ab %{minimum} ausgezahlt."
+      version: "Version der Bedingungen: %{version}"
+      sections:
+        - heading: "Belohnung pro Ansicht"
+          body: "Der Server erhält für jede vom Werbepartner bestätigte Werbeansicht feste %{reward}. Die Höhe hängt nicht davon ab, was wir selbst für die Ansicht erhalten. Wir können die Belohnung ändern; der neue Betrag gilt nur für Ansichten nach der Änderung, und wir informieren dich vorher."
+        - heading: "Haltefrist"
+          body: "Die Belohnung zählt %{hold} Tage nach der Ansicht zum Guthaben. Wir zählen sie nicht, wenn der Werbepartner die Ansicht in dieser Zeit storniert oder sie als verdächtig markiert wird."
+        - heading: "Auszahlung"
+          body: "Wir zahlen Guthaben ab %{minimum} in %{currency} aus. Ein kleineres Guthaben wird in die nächste Auszahlung übernommen. Auszahlungen gehen an die Daten im genehmigten Vertrag."
+        - heading: "Betrug und Missbrauch"
+          body: "Für betrügerische Ansichten, Bots oder mehrere Konten wird keine Belohnung gezahlt. Wir können Auszahlungen zurückhalten, rückgängig machen oder den Server trennen."
+        - heading: "Angaben, Steuern und Belege"
+          body: "Du bist für die Richtigkeit der Vertragsdaten und für deine Steuern verantwortlich. Auf Wunsch belegen wir Auszahlungen, und du lieferst uns die nötigen Unterlagen."
+        - heading: "Plugins und Belohnungen im Spiel"
+          body: "Für das Plugin und für das, was Spieler auf dem Server erhalten, ist der Serverbetreiber verantwortlich."
+        - heading: "Beendigung und Änderungen"
+          body: "Jede Seite kann die Zusammenarbeit beenden. Bereits gezähltes und geprüftes Guthaben zahlen wir aus. Wir können diese Bedingungen ändern und informieren dich über neue Versionen."
