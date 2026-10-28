@@ -1,0 +1,20 @@
+<% content_for :title, "#{t("pages.contact.title")} — Ads" %>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <%= render "shared/locale_switcher" %>
+  </div>
+  <div class="topbar-right"></div>
+</header>
+
+<main class="section legal">
+  <%= link_to t("pages.back_home"), root_path, class: "legal-back" %>
+  <h1 class="section-title"><%= t("pages.contact.title") %></h1>
+  <p class="section-lede"><%= t("pages.contact.body") %></p>
+
+  <% if @contact_email %>
+    <p><strong><%= t("pages.contact.email_label") %>:</strong> <%= mail_to @contact_email %></p>
+  <% end %>
+</main>
+
+<%= render "shared/footer" %>

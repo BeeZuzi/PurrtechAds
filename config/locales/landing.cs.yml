@@ -1,0 +1,76 @@
+cs:
+  meta:
+    description: "Ads propojuje hráče a Minecraft servery přes dobrovolnou odměňovanou reklamu. Server si sám nastaví odměnu ve hře."
+    tagline: "Zhlédni. Získej. Hraj."
+
+  common:
+    log_out: "Odhlásit se"
+    dashboard_title: "Přehled"
+
+  auth:
+    sign_in_required: "Nejdřív se musíš přihlásit."
+
+  footer:
+    terms: "Podmínky"
+    privacy: "Ochrana osobních údajů"
+    contact: "Kontakt"
+    nav_label: "Patička"
+
+  home:
+    trust:
+      title: "Co se u nás děje a co ne"
+      free_title: "Zdarma"
+      free_body: "Registrace i používání nic nestojí."
+      voluntary_title: "Dobrovolné"
+      voluntary_body: "Reklamu sleduješ, jen když sám chceš."
+      server_title: "Odměnu určuje server"
+      server_body: "Co dostaneš ve hře, nastavuje majitel serveru, ne my."
+      password_title: "Heslo v bezpečí"
+      password_body: "Heslo ukládáme jen jako nevratný otisk, nikdy v čitelné podobě."
+    faq:
+      title: "Časté otázky"
+      q1: "Kolik mi reklama vydělá?"
+      a1: "Výši odměny neslibujeme. Odměnu ve hře určuje majitel serveru přes svůj plugin a vzniká až po potvrzení zhlédnutí."
+      q2: "Musím reklamu sledovat?"
+      a2: "Ne. Je to vždy dobrovolné. Nic se nespustí bez tvého kliknutí."
+      q3: "Jak se odměna dostane do hry?"
+      a3: "Po potvrzení zhlédnutí vznikne krátce platný nárok. Plugin serveru ho ověří a odměnu ve hře udělí."
+      q4: "Jsem majitel serveru. Jak začít?"
+      a4: "Zaregistruj se, v přehledu zvol vlastní server a pošli žádost. Po schválení nainstaluješ plugin a nastavíš odměnu."
+      q5: "Co když odměna nepřijde?"
+      a5: "Napiš nám přes stránku Kontakt. Nárok si zobrazíme a zjistíme, kde se zastavil."
+
+  pages:
+    updated: "Poslední úprava: %{date}"
+    back_home: "Zpět na úvod"
+    draft_note: "Tento text je pracovní verze. Před ostrým provozem ho nech zkontrolovat."
+    terms:
+      title: "Podmínky použití"
+      sections:
+        - heading: "Co služba je"
+          body: "Ads propojuje hráče Minecraftu a servery přes dobrovolnou odměňovanou reklamu. Odměnu ve hře uděluje server, ne my."
+        - heading: "Účet"
+          body: "Musíš uvést pravdivý e-mail a svůj Minecraft nick. Za svůj účet a heslo odpovídáš ty."
+        - heading: "Odměny"
+          body: "Výši ani udělení odměny negarantujeme. Záleží na potvrzení zhlédnutí od partnera a na pluginu serveru."
+        - heading: "Zakázané jednání"
+          body: "Je zakázáno používat boty, více účtů, VPN k obcházení pravidel nebo jinak podvádět. Podezřelé účty můžeme omezit nebo zablokovat."
+        - heading: "Změny"
+          body: "Tyto podmínky můžeme upravit. O podstatných změnách tě budeme informovat."
+    privacy:
+      title: "Ochrana osobních údajů"
+      sections:
+        - heading: "Jaké údaje ukládáme"
+          body: "E-mail, Minecraft nick, hash hesla a u zhlédnutí reklamy také IP adresu a čas. IP adresu používáme k odhalování zneužití."
+        - heading: "Proč je používáme"
+          body: "K provozu účtu, potvrzení e-mailu, obnově hesla, přiznání odměn a ochraně proti podvodům."
+        - heading: "Komu je předáváme"
+          body: "Reklamní partner dostává technické údaje nutné k zobrazení nabídky. Údaje neprodáváme."
+        - heading: "Cookies"
+          body: "Používáme jen nutné cookies pro přihlášení a uložení jazyka a vzhledu. Neděláme sledování pro reklamu."
+        - heading: "Tvoje práva"
+          body: "Můžeš požádat o přístup k údajům, jejich opravu nebo smazání. Napiš nám přes stránku Kontakt."
+    contact:
+      title: "Kontakt"
+      body: "S dotazem, problémem s odměnou nebo žádostí o smazání údajů nám napiš."
+      email_label: "E-mail"

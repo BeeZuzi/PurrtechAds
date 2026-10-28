@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= I18n.locale %>">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= content_for?(:title) ? yield(:title) : "Ads — Watch. Earn. Play." %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "Ads — #{t("meta.tagline")}" %></title>
+  <meta name="description" content="<%= t("meta.description") %>">
 
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>

@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   root "home#index"
 
+  get "terms", to: "pages#terms"
+  get "privacy", to: "pages#privacy"
+  get "contact", to: "pages#contact"
+
   # Auth — sign in / log in card na landing page
   resource :session, only: [:new, :create, :destroy]
 

@@ -1,0 +1,8 @@
+<footer>
+  <nav class="footer-links" aria-label="<%= t("footer.nav_label") %>">
+    <%= link_to t("footer.terms"), terms_path %>
+    <%= link_to t("footer.privacy"), privacy_path %>
+    <%= link_to t("footer.contact"), contact_path %>
+  </nav>
+  <p><%= t("home.footer_html", year: Date.current.year) %></p>
+</footer>

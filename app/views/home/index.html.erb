@@ -1,4 +1,4 @@
-<% content_for :title, "Ads — Watch. Earn. Play." %>
+<% content_for :title, "Ads — #{t("meta.tagline")}" %>
 
 <header class="topbar">
   <div class="topbar-left">
@@ -82,7 +82,11 @@
         <%= f.submit t("home.auth.create_account"), class: "btn btn-primary auth-submit" %>
       <% end %>
 
-      <p class="auth-note"><%= t("home.auth.terms_note") %></p>
+      <p class="auth-note">
+        <%= t("home.auth.terms_note") %>
+        <%= link_to t("footer.terms"), terms_path %> ·
+        <%= link_to t("footer.privacy"), privacy_path %>
+      </p>
     </div>
   </div>
 
@@ -108,8 +112,32 @@
       </article>
     </div>
   </section>
+
+  <section class="section" id="trust">
+    <h2 class="section-title"><%= t("home.trust.title") %></h2>
+    <ul class="trust-grid">
+      <% %w[free voluntary server password].each do |key| %>
+        <li class="trust-item">
+          <h3><%= t("home.trust.#{key}_title") %></h3>
+          <p><%= t("home.trust.#{key}_body") %></p>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+
+  <section class="section" id="faq">
+    <h2 class="section-title"><%= t("home.faq.title") %></h2>
+    <div class="faq-list">
+      <% (1..5).each do |n| %>
+        <details class="faq-item">
+          <summary><%= t("home.faq.q#{n}") %></summary>
+          <p><%= t("home.faq.a#{n}") %></p>
+        </details>
+      <% end %>
+    </div>
+  </section>
 </main>
 
 <%= render "shared/settings_panel" %>
 
-<footer><%= t("home.footer_html", year: Date.current.year) %></footer>
+<%= render "shared/footer" %>
