@@ -20,4 +20,21 @@ class ClaimTest < ActiveSupport::TestCase
     assert_not claim.claimable?
     assert claim.expired?
   end
+
+  test "defaults to simulated source" do
+    claim = Claim.create!(user: users(:player), server: servers(:approved_server))
+    assert claim.source_simulated?
+  end
+
+  test "external_id must be unique when present" do
+    Claim.create!(user: users(:player), server: servers(:approved_server), external_id: "adgate-123")
+    dupe = Claim.new(user: users(:owner), server: servers(:approved_server), external_id: "adgate-123")
+    assert_not dupe.valid?
+  end
+
+  test "multiple claims may have a blank external_id" do
+    Claim.create!(user: users(:player), server: servers(:approved_server))
+    second = Claim.new(user: users(:owner), server: servers(:approved_server))
+    assert second.valid?
+  end
 end

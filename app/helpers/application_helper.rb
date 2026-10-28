@@ -90,4 +90,11 @@ end
 def country_options
     ISO3166::Country.all.map { |c| [ c.common_name, c.alpha2 ] }.sort_by(&:first)
   end
+
+  # Where server owners get the plugin: PLUGIN_DOWNLOAD_URL if set, otherwise a
+  # file dropped into public/downloads/ads-plugin.jar. nil until one exists.
+  def plugin_download_url
+    ENV["PLUGIN_DOWNLOAD_URL"].presence ||
+      ("/downloads/ads-plugin.jar" if Rails.public_path.join("downloads", "ads-plugin.jar").file?)
+  end
 end

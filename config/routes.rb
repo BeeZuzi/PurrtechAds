@@ -32,7 +32,13 @@ Rails.application.routes.draw do
   get "dashboard", to: "dashboard#show", as: :dashboard
   get "watch-ad", to: "ads#watch", as: :watch_ad
   post "watch-ad", to: "ads#claim", as: :claim_ad
+  get "watch-ad/offers", to: "ads#offers", as: :ad_offers
   get "banned", to: "sessions#banned", as: :banned
+
+  # --- Rewarded ad network postbacks ---
+  namespace :postbacks do
+    get "adgate", to: "ad_gate#create"
+  end
 
   # Volba jazyka — jednoduchý GET endpoint pro přepnutí locale
   get "locale/:locale", to: "locale#update", as: :set_locale
