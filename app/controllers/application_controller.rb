@@ -38,5 +38,4 @@ class ApplicationController < ActionController::Base
       redirect_to new_session_path, alert: "Tvůj účet byl zablokován."
     end
   end
-  
 end

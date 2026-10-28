@@ -1,5 +1,5 @@
 class Admin::ContractRequestsController < Admin::BaseController
-  before_action :set_contract_request, only: [:show, :update]
+  before_action :set_contract_request, only: [ :show, :update ]
 
   def index
     @contract_requests = ContractRequest.includes(:server, :user).order(created_at: :desc)
